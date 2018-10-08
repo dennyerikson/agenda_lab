@@ -1,0 +1,21 @@
+<h2>Agendamento</h2>
+{% for posts in post %}
+    <table>
+        <p>Laboratório | {{posts.lab}}</p>
+        <p>Curso | {{ course }}</p>
+        <p>Nome | {{posts.name}}</p>
+        <p>Periodo | {{ period }}</p>
+        <p>Data | {{posts.create_date}}</p>
+        <h1>-----------------------</h1>
+    </table>
+    
+{% endfor %}
+
+<br>
+<br>
+<br>
+<form class="form" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button id="btnim" type="submit" class="button">Salvar</button>
+</form>
