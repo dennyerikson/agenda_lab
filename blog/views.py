@@ -10,6 +10,7 @@ def post_list(request):
     for p in post:
         curso = p.course
         periodo = p.period
+        print(curso)
 
     courses = Courses.objects.filter(value=curso)
     for course in courses:
@@ -28,4 +29,5 @@ def post_list(request):
         form = PeriodForm()
 
     context = {'post':post, 'form':form, 'course':course, 'period':period}
+    # context = {'post':post, 'form':form}
     return render(request, 'blog/post_list.html', context)
