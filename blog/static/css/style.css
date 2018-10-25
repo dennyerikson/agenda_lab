@@ -1,0 +1,14 @@
+
+
+.btn_novo button{
+    float: right;
+    position: relative;
+	margin: 0 15px 0 0;
+}
+
+.logo{
+    float: right;
+    width: 100px;
+    position: relative;
+    margin: 0 15px 0 0;
+}
