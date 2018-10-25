@@ -1,0 +1,50 @@
+<!-- <script>
+
+    $(document).ready(function() {
+
+        $('#calendar').fullCalendar({
+            defaultDate: '2016-07-19',
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: [
+                {% for i in events %}
+                {
+                    title: "{{ i.event_name}}",
+                    start: '{{ i.start_date|date:"Y-m-d" }}',
+                    end: '{{ i.end_date|date:"Y-m-d" }}',
+
+                },
+                {% endfor %}
+
+            ]
+        });
+
+    });
+
+
+    $(document).ready(function(){
+        $('.event_types').on('change',function(){
+            var event_type = $.trim($(this).val());
+            $.ajax({
+                url: "{% url 'manage-event' %}",
+                type: 'GET',
+                data:{"event_type":event_type},
+                cache: false,
+                success: function (response) {
+                    var event_arr = $.parseJSON(response);
+                    $('#calendar').fullCalendar('removeEvents');
+                    $('#calendar').fullCalendar('addEventSource', event_arr);         
+                    $('#calendar').fullCalendar('rerenderEvents' );
+
+                },
+                error: function () {
+                    alert("error");
+                }
+
+
+            })
+            })
+
+    })
+
+</script> -->
