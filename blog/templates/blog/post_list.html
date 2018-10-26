@@ -1,76 +1,95 @@
-<!doctype html>
-   
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Calendário jQuery</title>    
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+{% load staticfiles %}
+{% load static %}
+{% load poll_extras %}
+<!DOCTYPE html>
+<html lang="PT-BR">
 
+    <head>
+        <title>AgendaFat</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+        <link  rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+        <!-- Cabeçalho -->
+        <div class="jumbotron text-center">
+            <div class="logo">
+                <img src="{% static "blog/img/logo.png" %}" width="100">
+            </div><!-- Fim Logo -->
+
+            <h1>Agenda FAT</h1>
+            <h4>Agendamento dos Laboratórios de Informática</h4>
+            <p>{{ msg }}</p> 
+
+            <div class="btn_novo">
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agendar</button>
+            </div><!--Fim btn-->
+
+            
+            
+        </div><!--Fim Cabeçalho -->
+
+        <!-- Container dados do agendamento-->
+        <div class="container">
+            <div class="row">
+
+                {% for posts in post %}
+                <div class="col-sm-4">
+
+                <h3>Laboratório {{posts.lab}} | {{posts.unidade|display_unidade_tag}}</h3>
+                <!-- <p>Unidade | {{posts.unidade|display_unidade_tag}}</p> -->
+                <p>Curso | {{ posts.course }}</p>
+                <p>Nome | {{posts.name}}</p>
+                <p>Periodo | {{ posts.period }}</p>
+                <p>Data | {{posts.create_date}}</p>
+
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div><!-- Fim Container dados do agendamento-->
+        
     
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--Modal para adicionar evento-->
+        <div class="container">          
+            
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
 
-</head>
-<body>
-    <p>Data: <input type="text" id="calendario" /></p>
+                        <!--Form do agendamento-->
+                        <form class="form" method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button class="btn btn-info btn-block"  id="btnim" type="submit" class="button">Salvar</button>
+                        </form>
+
+                    </div>
+                    <!-- <div class="modal-footer">
+                        <button class="btn btn-info btn-block"  id="btnim" type="submit" class="button">Salvar</button>
+                        <button type="button" class="btn btn-block" data-dismiss="modal">Cancelar</button>
+                    </div> -->
+                </div>
+                
+                </div>
+            </div>
+            
+        </div><!--Fim Modal-->
+    </body>
 
 
-
-    <h2>Agendamento</h2>
-{% for posts in post %}
-    <table>
-        <p>Laboratório | {{posts.lab}}</p>
-        <p>Curso | {{ course }}</p>
-        <p>Nome | {{posts.name}}</p>
-        <p>Periodo | {{ period }}</p>
-        <p>Data | {{posts.create_date}}</p>
-        <h1>-----------------------</h1>
-    </table>
-    
-{% endfor %}
-
-<br>
-<br>
-<br>
-
-
-<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Reserva</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-  
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <form class="form" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button id="btnim" type="submit" class="button">Salvar</button>
-    </form>
-
-      </div>
-    </div>
-    
-  </div>
-</div>
-
-<script>
-    $(function() {
-        $( "#calendario" ).datepicker().open();
-    });
-    </script>
-
- </body>
 </html>
-
-
