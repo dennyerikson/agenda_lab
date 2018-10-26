@@ -6,8 +6,9 @@ from .forms import PeriodForm
 # Create your views here.
 def post_list(request):
  
-
-    post = Post.objects.filter(create_date=timezone.now()).order_by('create_date')
+    data_inicial = timezone.now()
+    data_final = data_inicial.fromordinal(data_inicial.toordinal()+5)
+    post = Post.objects.filter(create_date__range=[timezone.now(), data_final]).order_by('create_date')
     for p in post:
         curso = p.course
         periodo = p.period

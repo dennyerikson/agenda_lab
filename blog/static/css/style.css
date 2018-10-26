@@ -12,3 +12,18 @@
     position: relative;
     margin: 0 15px 0 0;
 }
+
+
+/* ajustes datepicker
+
+.datepicker.dropdown-menu {
+	z-index: 10002 !important;
+}
+
+.datepicker {
+    transform: translate(0, 3.1em);
+  }  */
+
+.datetime-input{
+    
+}

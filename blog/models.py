@@ -4,12 +4,13 @@ from django.utils import timezone
 
 # Create your models here.
 class Post(models.Model):
-    lab = models.CharField(max_length=2)
-    course = models.CharField(max_length=2)
-    name = models.CharField(max_length=150)
-    period = models.CharField(max_length=2)
+    lab = models.CharField(verbose_name='Laboratório',max_length=2)
+    course = models.CharField(verbose_name='Curso',max_length=2)
+    name = models.CharField(verbose_name='Nome',max_length=150)
+    period = models.CharField(verbose_name='Periodo',max_length=2)
     create_date = models.DateField(
-        default=timezone.now
+        verbose_name='Data',
+        # default=timezone.now
     )
     # opções de unidade
     UNIDADE_CHOICES = (

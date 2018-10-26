@@ -13,7 +13,22 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+        <!-- calendar widget-->
+        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+        <!-- calendar widget-->
+
+
+        <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/js/bootstrap-datetimepicker.min.js"></script>
+
         <link  rel="stylesheet" href="{% static 'css/style.css' %}">
+        
     </head>
 
     <body>
@@ -71,24 +86,53 @@
                     </div>
                     <div class="modal-body">
 
-                        <!--Form do agendamento-->
-                        <form class="form" method="POST">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <!-- <button class="btn btn-info btn-block"  id="btnim" type="submit" class="button">Salvar</button> -->
-                        </form>
+                        <!-- <script type="text/javascript" src="/admin/jsi18n/"></script>
+                        <script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+                        <script type="text/javascript" src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
+                        <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.min.js' %}"></script>
+                        <script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script>
+                        <script type="text/javascript" src="{% static 'admin/js/actions.min.js' %}"></script>
+                        <script type="text/javascript" src="{% static 'admin/js/calendar.js' %}"></script>
+                        <script type="text/javascript" src="{% static 'admin/js/admin/DateTimeShortcuts.js' %}"></script> -->
 
+                        <!-- <script>
+                         $('#AdminDateWidget').AdminDateWidget({
+                            container:'#myModal',                            
+                            });
+                        </script> -->
+
+                        <!--Form do agendamento-->
+                        <form class="form" method="POST">                          
+                            {% csrf_token %}
+
+                            {{ form.as_p }}
+                            <button class="btn btn-info btn-block"  id="btnim" type="submit" class="button">Salvar</button>
+                            
+                        </form>
+                        <script>
+                            $(function () {
+                                $('.datetime-input').datetimepicker({
+                                    format:'YYYY-MM-DD',
+                                })
+                            });
+
+                            // $('.datetime-input').datetimepicker()
+                            // .on('.datetime-input', function(ev){                 
+                            //     $('.datetime-input').datetimepicker('hide');
+                            // });
+                        </script>
                     </div>
-                    <div class="modal-footer">
+                    <!-- <div class="modal-footer">
                         <button class="btn btn-info btn-block"  id="btnim" type="submit" class="button">Salvar</button>
                         <button type="button" class="btn btn-block" data-dismiss="modal">Cancelar</button>
-                    </div>
+                    </div> -->
                 </div>
                 
                 </div>
             </div>
             
         </div><!--Fim Modal-->
+
     </body>
 
 
