@@ -1,46 +1,23 @@
+{% extends 'blog/base.html' %}
 {% load staticfiles %}
 {% load static %}
 {% load poll_extras %}
-<!DOCTYPE html>
-<html lang="PT-BR">
 
-    <head>
-        <title>AgendaFat</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-        <!-- calendar widget-->
-        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-        <!-- calendar widget-->
-
-
-        <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-<script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/js/bootstrap-datetimepicker.min.js"></script>
-
-        <link  rel="stylesheet" href="{% static 'css/style.css' %}">
-        
-    </head>
-
+{% block content %}
     <body>
+
         <!-- Cabeçalho -->
         <div class="jumbotron text-center">
             <div class="logo">
-                <img src="{% static "blog/img/logo.png" %}" width="100">
+                <img src="{% static "blog/img/logo.png" %}" width="70">
             </div><!-- Fim Logo -->
 
-            <h1>Agenda FAT</h1>
-            <h4>Agendamento dos Laboratórios de Informática</h4>
-            <p>{{ msg }}</p> 
+            <div class="cabecalho">
+                <h1>Agenda FAT</h1>
+                <h5>Agendamento dos Laboratórios de Informática</h5>
+                <p>{{ msg }}</p> 
+                <!-- <p>{{ post }}</p>  -->
+            </div>
 
             <div class="btn_novo">
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agendar</button>
@@ -55,14 +32,17 @@
             <div class="row">
 
                 {% for posts in post %}
-                <div class="col-sm-4">
+                <div class="col-sm-3">
+                    
+                    {% if posts.unidade == "1" %}
+                        <h3><a class="nounderline" href=" {% url 'post_detail' pk=posts.pk %} " >Laboratório {{posts.lab}} | <font color="tomato"><b>{{posts.unidade|display_unidade_tag}}</b></a></font></h3>
+                    {% else %}
+                        <h3><a class="nounderline" href=" {% url 'post_detail' pk=posts.pk %} " >Laboratório {{posts.lab}} | <font color="cornflowerblue"><b>{{posts.unidade|display_unidade_tag}}</b></a></font></h3>
+                        <!-- <h3>Laboratório {{posts.lab}} | <font color="cornflowerblue" ><b>{{posts.unidade|display_unidade_tag}}</b></font></h3> -->
+                    {% endif %}
 
-                <h3>Laboratório {{posts.lab}} | {{posts.unidade|display_unidade_tag}}</h3>
-                <!-- <p>Unidade | {{posts.unidade|display_unidade_tag}}</p> -->
-                <p>Curso | {{ posts.course }}</p>
-                <p>Nome | {{posts.name}}</p>
-                <p>Periodo | {{ posts.period }}</p>
-                <p>Data | {{posts.create_date}}</p>
+                    <p>Curso | {{ posts.course }}</p>
+                    <p>Data | {{posts.create_date}}</p>
 
                 </div>
                 {% endfor %}
@@ -80,9 +60,9 @@
                 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header">                    
+                    <h4 class="modal-title">Cadastrar agendamento</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
                     </div>
                     <div class="modal-body">
 
@@ -133,7 +113,7 @@
             
         </div><!--Fim Modal-->
 
+        
+
     </body>
-
-
-</html>
+    {% endblock %}

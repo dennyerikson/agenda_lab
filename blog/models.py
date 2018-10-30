@@ -20,7 +20,7 @@ class Post(models.Model):
     unidade = models.CharField(verbose_name='Unidade', max_length=2, choices=UNIDADE_CHOICES)
 
     def __str__(self):
-        return str(self.create_date)
+        return self.lab
 
 class Period(models.Model):
     value = models.CharField(max_length=2)

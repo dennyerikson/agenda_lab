@@ -13,6 +13,16 @@
     margin: 0 15px 0 0;
 }
 
+.container .row .col-sm-3 h3 a{
+    text-decoration: none;
+    color: #696969;
+}
+
+.cabecalho h1{
+    text-decoration: none;
+    color: #FF6347;
+}
+
 
 /* ajustes datepicker
 

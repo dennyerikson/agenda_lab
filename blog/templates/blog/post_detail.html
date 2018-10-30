@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% load poll_extras %}
+
+{% block content %}
+
+<div class="container jumbotron text-center" >
+
+
+    {% if post.unidade|display_unidade_tag == "VG" %}
+        <h3><a >Laboratório {{post.lab}} | <font color="tomato"><b>{{post.unidade|display_unidade_tag}}</b></a></font></h3>
+    {% else %}
+        <h3><a >Laboratório {{post.lab}} | <font color="cornflowerblue"><b>{{post.unidade|display_unidade_tag}}</b></a></font></h3>
+        <!-- <h3>Laboratório {{posts.lab}} | <font color="cornflowerblue" ><b>{{posts.unidade|display_unidade_tag}}</b></font></h3> -->
+    {% endif %}
+
+    <!-- <p>Unidade | {{posts.unidade|display_unidade_tag}}</p> -->
+    <p>Curso | {{ post.course }}</p>
+    <p>Nome | {{post.name}}</p>
+    <p>Periodo | {{ post.period }}</p>
+    <p>Data | {{post.create_date}}</p>
+    
+
+</div>
+
+{% endblock%}

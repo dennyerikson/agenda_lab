@@ -2,49 +2,59 @@ from django.shortcuts import render
 from .models import *
 from django.utils import timezone
 from .forms import PeriodForm
+import platform
+from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect
 
 # Create your views here.
 def post_list(request):
+
+    print(platform.system())
  
     data_inicial = timezone.now()
     data_final = data_inicial.fromordinal(data_inicial.toordinal()+5)
     post = Post.objects.filter(create_date__range=[timezone.now(), data_final]).order_by('create_date')
-    for p in post:
-        curso = p.course
-        periodo = p.period
-    try:
-        print(curso, periodo)
-        msg=''
-    except:
-        curso = '01'
-        periodo = '01'
-        msg = 'Sem agendamento na data autal'
+    # post = Post.objects.all()
+    # for p in post:
+    #     curso = p.course
+    #     periodo = p.period
+    # try:
+    #     print(curso, periodo)
+    #     msg=''
+    # except:
+    #     curso = '01'
+    #     periodo = '01'
+    #     msg = 'Sem agendamento na data autal'
 
-    try:
-        courses = Courses.objects.filter(value=curso)
-        for course in courses:
-            print(course)
+    # try:
+    #     courses = Courses.objects.filter(value=curso)
+    #     for course in courses:
+    #         print(course)
 
-        periods = Period.objects.filter(value=periodo)
-        for period in periods:
-            print(period)
-    except:
-        print(msg)
+    #     periods = Period.objects.filter(value=periodo)
+    #     for period in periods:
+    #         print(period)
+    # except:
+    #     print(msg)
 
-    if request.POST:
+    if request.method == 'POST':
         form = PeriodForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
+            postar = form.save(commit=False)
+            postar.save()
+            return redirect('/')
     else:
         form = PeriodForm()
     
 
-    context = {'post':post, 'form':form, 'course':course, 'period':period, 'msg':msg}
+    # context = {'post':post, 'form':form, 'course':course, 'period':period, 'msg':msg}
+    context = {'post':post, 'form':form}
     return render(request, 'blog/post_list.html', context)
 
 
-
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
 
 # def event(request):
 #     all_events = Events.objects.all()
