@@ -7,17 +7,30 @@
 
 
     {% if post.unidade|display_unidade_tag == "VG" %}
-        <h3><a >Laboratório {{post.lab}} | <font color="tomato"><b>{{post.unidade|display_unidade_tag}}</b></a></font></h3>
+        <h2><a >Laboratório {{post.lab}} | <font color="tomato"><b>{{post.unidade|display_unidade_tag}}</b></a></font></h2>
     {% else %}
-        <h3><a >Laboratório {{post.lab}} | <font color="cornflowerblue"><b>{{post.unidade|display_unidade_tag}}</b></a></font></h3>
+        <h2><a >Laboratório {{post.lab}} | <font color="cornflowerblue"><b>{{post.unidade|display_unidade_tag}}</b></a></font></h2>
         <!-- <h3>Laboratório {{posts.lab}} | <font color="cornflowerblue" ><b>{{posts.unidade|display_unidade_tag}}</b></font></h3> -->
     {% endif %}
 
-    <!-- <p>Unidade | {{posts.unidade|display_unidade_tag}}</p> -->
-    <p>Curso | {{ post.course }}</p>
+    {% display_curses_tag post.course as courses %}
+    {% for course in courses %}
+        <h3>Curso | {{ course }}</h3>
+    {% endfor %}
+
     <p>Nome | {{post.name}}</p>
-    <p>Periodo | {{ post.period }}</p>
-    <p>Data | {{post.create_date}}</p>
+
+    {% display_period_tag post.period as periods %}
+    {% for period in periods %}
+        <p>Periodo | {{ period }}{% if post.period == "01" %}
+            <img src="https://png.icons8.com/ios/50/666666/summer-filled.png" width="30">{%else%}
+            <img src="https://png.icons8.com/ios-glyphs/50/666666/moon-symbol.png"width="30">{%endif%}
+
+        </p>
+    {% endfor %}
+
+    <p>{{ post.details|linebreaks }}</p>
+    <h2>{{post.create_date}}</h2>   
     
 
 </div>

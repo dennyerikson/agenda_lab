@@ -8,6 +8,7 @@ class Post(models.Model):
     course = models.CharField(verbose_name='Curso',max_length=2)
     name = models.CharField(verbose_name='Nome',max_length=150)
     period = models.CharField(verbose_name='Periodo',max_length=2)
+    details = models.TextField(verbose_name='Detalhes',max_length=150)
     create_date = models.DateField(
         verbose_name='Data',
         # default=timezone.now
@@ -20,7 +21,7 @@ class Post(models.Model):
     unidade = models.CharField(verbose_name='Unidade', max_length=2, choices=UNIDADE_CHOICES)
 
     def __str__(self):
-        return self.lab
+        return str(self.create_date)
 
 class Period(models.Model):
     value = models.CharField(max_length=2)

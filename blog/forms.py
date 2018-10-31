@@ -11,7 +11,7 @@ class PeriodForm(forms.ModelForm):
         COURSES = Courses.objects.all()
 
         model = Post
-        fields =('create_date','lab','course','name','period','unidade')
+        fields =('create_date','lab','course','name','period','unidade','details')
         widgets={
             'lab':Select(choices=((choice.value, choice.name) for choice in LAB )),
             'course':Select(choices=((choice.value, choice.name) for choice in COURSES )),

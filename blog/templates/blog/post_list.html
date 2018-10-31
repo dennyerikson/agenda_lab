@@ -33,7 +33,7 @@
 
                 {% for posts in post %}
                 <div class="col-sm-3">
-                    
+
                     {% if posts.unidade == "1" %}
                         <h3><a class="nounderline" href=" {% url 'post_detail' pk=posts.pk %} " >Laboratório {{posts.lab}} | <font color="tomato"><b>{{posts.unidade|display_unidade_tag}}</b></a></font></h3>
                     {% else %}
@@ -41,8 +41,19 @@
                         <!-- <h3>Laboratório {{posts.lab}} | <font color="cornflowerblue" ><b>{{posts.unidade|display_unidade_tag}}</b></font></h3> -->
                     {% endif %}
 
-                    <p>Curso | {{ posts.course }}</p>
+                    {% display_curses_tag posts.course as courses %}
+                    {% for course in courses %}
+                        <p>Curso | {{ course }} {% if posts.period == "01" %}
+                            <img src="https://png.icons8.com/ios/50/666666/summer-filled.png" width="30">{%else%}
+                            <img src="https://png.icons8.com/ios-glyphs/50/666666/moon-symbol.png"width="30">{%endif%}
+                        </p>
+                    {% endfor %}
+
                     <p>Data | {{posts.create_date}}</p>
+
+                    <!-- <img src="https://png.icons8.com/ios-glyphs/50/000000/moon-symbol.png"> -->
+                    <!-- <img src="https://png.icons8.com/ios-glyphs/50/000000/sun.png"> -->
+
 
                 </div>
                 {% endfor %}

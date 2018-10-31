@@ -5,6 +5,7 @@ from .forms import PeriodForm
 import platform
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
+from django.db.models import Q
 
 # Create your views here.
 def post_list(request):
@@ -14,35 +15,39 @@ def post_list(request):
     data_inicial = timezone.now()
     data_final = data_inicial.fromordinal(data_inicial.toordinal()+5)
     post = Post.objects.filter(create_date__range=[timezone.now(), data_final]).order_by('create_date')
-    # post = Post.objects.all()
-    # for p in post:
-    #     curso = p.course
-    #     periodo = p.period
-    # try:
-    #     print(curso, periodo)
-    #     msg=''
-    # except:
-    #     curso = '01'
-    #     periodo = '01'
-    #     msg = 'Sem agendamento na data autal'
-
-    # try:
-    #     courses = Courses.objects.filter(value=curso)
-    #     for course in courses:
-    #         print(course)
-
-    #     periods = Period.objects.filter(value=periodo)
-    #     for period in periods:
-    #         print(period)
-    # except:
-    #     print(msg)
+    
 
     if request.method == 'POST':
         form = PeriodForm(request.POST)
         if form.is_valid():
-            postar = form.save(commit=False)
-            postar.save()
-            return redirect('/')
+
+            data = request.POST.get('create_date')
+            unidade = request.POST.get('unidade')
+            lab = request.POST.get('lab')
+            periodo = request.POST.get('period')
+            
+
+            query = Post.objects.filter(
+                create_date=data, unidade=unidade, lab=lab, period=periodo
+            )
+            for q in query:
+                print(q.lab),
+                print(q.course),
+                print(q.period),
+                print(q.create_date)
+
+            if query:                
+                if lab!=q.lab:
+                    print('if')
+                    postar = form.save(commit=False)
+                    postar.save()
+                    return redirect('/')
+            else:  
+                print('elif')              
+                postar = form.save(commit=False)
+                postar.save()
+                return redirect('/')
+             
     else:
         form = PeriodForm()
     
