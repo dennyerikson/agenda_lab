@@ -23,6 +23,33 @@
     color: #FF6347;
 }
 
+.container .row .col-sm-3 p .icon_period img{
+    float: right;
+    width: 20px;
+    position: relative;
+    margin: 0 15px 0 0;
+}
+
+#overlay{
+    visibility: hidden;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+#overlay div{
+    width: 300px;
+    margin: 100px auto;
+    background-color: #fff;
+    border: 1px #000;
+    padding: 15px;
+    text-align: center;
+}
+
 
 /* ajustes datepicker
 
@@ -36,4 +63,55 @@
 
 .datetime-input{
     
+}
+
+
+
+
+
+
+
+
+
+
+/* @import url(https://fonts.googleapis.com/css?family=Roboto:300); */
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: auto;
+  padding: 45px;
+  text-align: left;
+  /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); */
+}
+.form input {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  font-size: 14px;
+}
+.form button {
+  text-transform: uppercase;
+  outline: 0;
+  background: #828282;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: rgb(20, 20, 20);
+}
+
+.pure-control-group #id_details{
+    width: 100%;
+    height: 70px;
 }

@@ -20,7 +20,7 @@ def post_list(request):
 
     if request.method == 'POST':
         form = PeriodForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() == True:
 
             data = request.POST.get('create_date')
             unidade = request.POST.get('unidade')
@@ -32,10 +32,10 @@ def post_list(request):
                 create_date=data, unidade=unidade, lab=lab, period=periodo
             )
             for q in query:
-                print(q.lab),
-                print(q.course),
-                print(q.period),
-                print(q.create_date)
+                q.lab,
+                q.course,
+                q.period,
+                q.create_date,
 
             if query:                
                 if lab!=q.lab:
@@ -43,11 +43,13 @@ def post_list(request):
                     postar = form.save(commit=False)
                     postar.save()
                     return redirect('/')
+                
             else:  
                 print('elif')              
                 postar = form.save(commit=False)
                 postar.save()
                 return redirect('/')
+            
              
     else:
         form = PeriodForm()
@@ -61,6 +63,7 @@ def post_list(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
+
 
 # def event(request):
 #     all_events = Events.objects.all()

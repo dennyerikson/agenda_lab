@@ -21,4 +21,22 @@ class PeriodForm(forms.ModelForm):
             # 'create_date': widgets.AdminDateWidget,
             'create_date': forms.DateInput(attrs={'class':'datetime-input'}),
         }
-    
+
+    def clean_date(self):
+        # get valor dos campos
+        data = self.cleaned_data.get('create_date')
+        unidade = self.cleaned_data.get('unidade')
+        periodo = self.cleaned_data.get('period')
+        lab = self.cleaned_data.get('lab')
+        
+        # checar persistência
+        query = Post.objects.filter(
+            create_date=data, unidade=unidade, lab=lab, period=periodo
+        ).exists()
+
+        # testar query
+        if query:
+            # informar erro
+            msg = 'Já está agendado para esta data!'
+            raise forms.ValidationError(msg)
+        return data

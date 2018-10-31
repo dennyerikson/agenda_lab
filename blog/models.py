@@ -8,7 +8,8 @@ class Post(models.Model):
     course = models.CharField(verbose_name='Curso',max_length=2)
     name = models.CharField(verbose_name='Nome',max_length=150)
     period = models.CharField(verbose_name='Periodo',max_length=2)
-    details = models.TextField(verbose_name='Detalhes',max_length=150)
+    details = models.TextField(verbose_name='Detalhes',max_length=150,
+    help_text='Descreva os detalhes do agendamento com até 120 caracteres, obrigado!')
     create_date = models.DateField(
         verbose_name='Data',
         # default=timezone.now

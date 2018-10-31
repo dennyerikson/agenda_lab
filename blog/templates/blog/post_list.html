@@ -23,7 +23,7 @@
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agendar</button>
             </div><!--Fim btn-->
 
-            
+            <a href="#" onclick="overlay()">Click para interagir!</a>
             
         </div><!--Fim Cabeçalho -->
 
@@ -44,8 +44,8 @@
                     {% display_curses_tag posts.course as courses %}
                     {% for course in courses %}
                         <p>Curso | {{ course }} {% if posts.period == "01" %}
-                            <img src="https://png.icons8.com/ios/50/666666/summer-filled.png" width="30">{%else%}
-                            <img src="https://png.icons8.com/ios-glyphs/50/666666/moon-symbol.png"width="30">{%endif%}
+                            <img  style="float:right; margin: 0 50px 0 0;" src="https://png.icons8.com/ios/50/666666/summer-filled.png" width="20">{%else%}
+                            <img  style="float:right; margin: 0 50px 0 0;" src="https://png.icons8.com/ios-glyphs/50/666666/moon-symbol.png"width="20">{%endif%}
                         </p>
                     {% endfor %}
 
@@ -93,14 +93,40 @@
                         </script> -->
 
                         <!--Form do agendamento-->
-                        <form class="form" method="POST">                          
+                        <div class="login-page">
+                            <div class="form">
+
+                                <form class="pure-form pure-form-aligned" method="POST">
+                                    {% csrf_token %}
+
+                                    <fieldset>
+                                        {{ form.non_field_errors }}
+
+                                        {% for field in form %}
+                                            <div class="pure-control-group">
+                                                {{ field.label_tag}}
+                                                {{field}}
+                                                {{field.errors}}
+                                            </div>
+                                        {% endfor %}
+
+                                        <button class="btn btn-info btn-block"  id="btnim" type="submit" class="button">Salvar</button>
+
+                                    </fieldset>
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                        <!-- <form class="form" method="POST">                          
                             {% csrf_token %}
 
                             {{ form.as_p }}
+                            
                             <button class="btn btn-info btn-block"  id="btnim" type="submit" class="button">Salvar</button>
 
-                            
-                        </form>
+                        </form> -->
                         <script>
                             $(function () {
                                 $('.datetime-input').datetimepicker({
@@ -124,6 +150,22 @@
             </div>
             
         </div><!--Fim Modal-->
+
+        <div id="overlay">
+            <div>
+                
+                <p> Ops já temos um agendamento com essa data </p>
+                
+                Clique aqui para [<a href='#' onclick='overlay()'> fechar </a>]
+            </div>
+        </div><!--Fim overlay-->
+
+        <script>
+            function overlay(){
+                el = document.getElementById("overlay");
+                el.style.visibility = (el.style.visibility == "visible")? "hidden":"visible"
+            }
+        </script>
 
         
 
