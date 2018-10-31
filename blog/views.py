@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from .models import *
 from django.utils import timezone
@@ -89,3 +90,4 @@ def post_detail(request, pk):
 
 #     }
 #     return render(request,'blog/event_management.html',context)
+
