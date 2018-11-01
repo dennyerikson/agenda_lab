@@ -23,7 +23,7 @@
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agendar</button>
             </div><!--Fim btn-->
 
-            <a href="#" onclick="overlay()">Click para interagir!</a>
+            <!-- <a href="#" onclick="overlay()">Click para interagir!</a> -->
             
         </div><!--Fim Cabeçalho -->
 
@@ -33,7 +33,7 @@
 
                 {% for posts in post %}
                 <div class="col-sm-3">
-
+                    <div class="detail-body">
                     {% if posts.unidade == "1" %}
                         <h3><a class="nounderline" href=" {% url 'post_detail' pk=posts.pk %} " >Laboratório {{posts.lab}} | <font color="tomato"><b>{{posts.unidade|display_unidade_tag}}</b></a></font></h3>
                     {% else %}
@@ -44,8 +44,8 @@
                     {% display_curses_tag posts.course as courses %}
                     {% for course in courses %}
                         <p>Curso | {{ course }} {% if posts.period == "01" %}
-                            <img  style="float:right; margin: 0 50px 0 0;" src="https://png.icons8.com/ios/50/666666/summer-filled.png" width="20">{%else%}
-                            <img  style="float:right; margin: 0 50px 0 0;" src="https://png.icons8.com/ios-glyphs/50/666666/moon-symbol.png"width="20">{%endif%}
+                            <img  src="https://png.icons8.com/ios/50/666666/summer-filled.png" width="20">{%else%}
+                            <img  src="https://png.icons8.com/ios-glyphs/50/666666/moon-symbol.png"width="20">{%endif%}
                         </p>
                     {% endfor %}
 
@@ -54,7 +54,7 @@
                     <!-- <img src="https://png.icons8.com/ios-glyphs/50/000000/moon-symbol.png"> -->
                     <!-- <img src="https://png.icons8.com/ios-glyphs/50/000000/sun.png"> -->
 
-
+                    </div>   
                 </div>
                 {% endfor %}
                 
@@ -104,9 +104,11 @@
 
                                         {% for field in form %}
                                             <div class="pure-control-group">
-                                                {{ field.label_tag}}
-                                                {{field}}
-                                                {{field.errors}}
+                                                <div class="custon-select">
+                                                    {{ field.label_tag}}
+                                                    {{field}}
+                                                    {{field.errors}}
+                                                </div>
                                             </div>
                                         {% endfor %}
 
@@ -119,26 +121,14 @@
 
                         </div>
 
-                        <!-- <form class="form" method="POST">                          
-                            {% csrf_token %}
-
-                            {{ form.as_p }}
-                            
-                            <button class="btn btn-info btn-block"  id="btnim" type="submit" class="button">Salvar</button>
-
-                        </form> -->
                         <script>
                             $(function () {
                                 $('.datetime-input').datetimepicker({
                                     format:'YYYY-MM-DD',
                                 })
                             });
-
-                            // $('.datetime-input').datetimepicker()
-                            // .on('.datetime-input', function(ev){                 
-                            //     $('.datetime-input').datetimepicker('hide');
-                            // });
                         </script>
+
                     </div>
                     <!-- <div class="modal-footer">
                         <button class="btn btn-info btn-block"  id="btnim" type="submit" class="button">Salvar</button>

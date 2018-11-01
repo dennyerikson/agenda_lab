@@ -12,15 +12,26 @@
     position: relative;
     margin: 0 15px 0 0;
 }
-
+.container{
+    text-align: center;
+}
 .container .row .col-sm-3 h3 a{
     text-decoration: none;
     color: #696969;
 }
 
+.jumbotron{
+    text-align: left;
+    height: 180px;
+}
 .cabecalho h1{
     text-decoration: none;
     color: #FF6347;
+    text-align: center;
+}
+.cabecalho h5{
+    text-decoration: none;
+    text-align: center;
 }
 
 .container .row .col-sm-3 p .icon_period img{
@@ -50,30 +61,13 @@
     text-align: center;
 }
 
-
-/* ajustes datepicker
-
-.datepicker.dropdown-menu {
-	z-index: 10002 !important;
-}
-
-.datepicker {
-    transform: translate(0, 3.1em);
-  }  */
-
-.datetime-input{
-    
+.form .vDateField{
+    position: absolute;
+    z-index: 100000;
 }
 
 
-
-
-
-
-
-
-
-
+/* estilo do form */
 /* @import url(https://fonts.googleapis.com/css?family=Roboto:300); */
 
 .form {
@@ -81,7 +75,7 @@
   z-index: 1;
   background: #FFFFFF;
   max-width: auto;
-  padding: 45px;
+  padding: 10px;
   text-align: left;
   /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); */
 }
@@ -97,21 +91,69 @@
 .form button {
   text-transform: uppercase;
   outline: 0;
-  background: #828282;
+  background: #00BFFF;
   width: 100%;
   border: 0;
   padding: 15px;
   color: #FFFFFF;
-  font-size: 14px;
+  font-size: 16px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: rgb(20, 20, 20);
+  /* background: rgb(20, 20, 20); */
+  background: #1E90FF;
+  
 }
 
 .pure-control-group #id_details{
     width: 100%;
     height: 70px;
 }
+
+.form label{
+    font-size: 16px;
+    position: relative;
+}
+
+.form select{
+    width: 70%;
+    float: right;
+    position: relative;
+    background-color: white;
+    border: 2px solid;
+    border-color: transparent transparent  #00BFFF transparent ; 
+}
+/* estilo do form */
+
+/* style details template */
+.detail-body{
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    width: auto;
+    max-width: auto;
+    padding: 10px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    margin: 10px auto;
+}
+.fancy {
+    outline: 0;
+    background: #f2f2f2;
+    width: 80%;
+    border: 0;
+    border-width: 10px; 
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 14px;
+
+    top: 50%;
+    left: 50%;
+  }
+
+  .fancy p{
+    text-align: justify;
+    word-wrap: break-word;
+  }
+  /* style details template */

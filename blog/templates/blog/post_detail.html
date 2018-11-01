@@ -1,36 +1,48 @@
 {% extends 'blog/base.html' %}
 {% load poll_extras %}
+{% load static %}
 
 {% block content %}
 
-<div class="container jumbotron text-center" >
+<div class="jumbotron text-center" >
 
 
-    {% if post.unidade|display_unidade_tag == "VG" %}
-        <h2><a >Laboratório {{post.lab}} | <font color="tomato"><b>{{post.unidade|display_unidade_tag}}</b></a></font></h2>
-    {% else %}
-        <h2><a >Laboratório {{post.lab}} | <font color="cornflowerblue"><b>{{post.unidade|display_unidade_tag}}</b></a></font></h2>
-        <!-- <h3>Laboratório {{posts.lab}} | <font color="cornflowerblue" ><b>{{posts.unidade|display_unidade_tag}}</b></font></h3> -->
-    {% endif %}
+    <div class="detail-body">
+        <div class="detail-top">
+            {% if post.unidade|display_unidade_tag == "VG" %}
+            <h1><a >Laboratório {{post.lab}} | <font color="tomato"><b>{{post.unidade|display_unidade_tag}}</b></a></font></h1>
+            {% else %}
+                <h1><a >Laboratório {{post.lab}} | <font color="cornflowerblue"><b>{{post.unidade|display_unidade_tag}}</b></a></font></h1>
+                <!-- <h3>Laboratório {{posts.lab}} | <font color="cornflowerblue" ><b>{{posts.unidade|display_unidade_tag}}</b></font></h3> -->
+            {% endif %}
+        </div>
 
-    {% display_curses_tag post.course as courses %}
-    {% for course in courses %}
-        <h3>Curso | {{ course }}</h3>
-    {% endfor %}
+        <div class="">
+            {% display_curses_tag post.course as courses %}
+            {% for course in courses %}
+                <h3>Curso | {{ course }}</h3>
+            {% endfor %}
 
-    <p>Nome | {{post.name}}</p>
+            <p>Nome | {{post.name}}</p>
 
-    {% display_period_tag post.period as periods %}
-    {% for period in periods %}
-        <p>Periodo | {{ period }}{% if post.period == "01" %}
-            <img src="https://png.icons8.com/ios/50/666666/summer-filled.png" width="30">{%else%}
-            <img src="https://png.icons8.com/ios-glyphs/50/666666/moon-symbol.png"width="30">{%endif%}
+            {% display_period_tag post.period as periods %}
+            {% for period in periods %}
+                <p>Periodo | {{ period }}{% if post.period == "01" %}
+                    <img src="https://png.icons8.com/ios/50/666666/summer-filled.png" width="30">{%else%}
+                    <img src="https://png.icons8.com/ios-glyphs/50/666666/moon-symbol.png"width="30">{%endif%}
 
-        </p>
-    {% endfor %}
+                </p>
+            {% endfor %}
 
-    <p>{{ post.details|linebreaks }}</p>
-    <h2>{{post.create_date}}</h2>   
+            <div class="fancy">
+                <p>{{ post.details|linebreaks }}</p>
+            </div>
+
+            
+            <h2>{{post.create_date}}</h2>
+        </div>
+
+    </div>   
     
 
 </div>

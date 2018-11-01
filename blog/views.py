@@ -20,7 +20,7 @@ def post_list(request):
 
     if request.method == 'POST':
         form = PeriodForm(request.POST)
-        if form.is_valid() == True:
+        if form.is_valid():
 
             data = request.POST.get('create_date')
             unidade = request.POST.get('unidade')

@@ -10,7 +10,7 @@ class Post(models.Model):
     period = models.CharField(verbose_name='Periodo',max_length=2)
     details = models.TextField(verbose_name='Detalhes',max_length=150,
     help_text='Descreva os detalhes do agendamento com até 120 caracteres, obrigado!')
-    create_date = models.DateField(
+    create_date = models.DateField( # alterar campo para DateTimeField
         verbose_name='Data',
         # default=timezone.now
     )
