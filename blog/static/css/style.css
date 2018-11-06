@@ -7,8 +7,10 @@
 }
 
 .logo{
+
+    margin-top: 0%;
     float: right;
-    width: 100px;
+    width: 60px;
     position: relative;
     margin: 0 15px 0 0;
 }
@@ -24,7 +26,9 @@
     text-align: left;
     height: 180px;
 }
+
 .cabecalho h1{
+    margin-top: 0%;
     text-decoration: none;
     color: #FF6347;
     text-align: center;
@@ -124,6 +128,11 @@
     background-color: white;
     border: 2px solid;
     border-color: transparent transparent  #00BFFF transparent ; 
+
+}
+
+.errorlist li{
+    color: tomato;
 }
 /* estilo do form */
 
@@ -157,3 +166,208 @@
     word-wrap: break-word;
   }
   /* style details template */
+
+  /* style menu */
+.menu{
+    width: 100%;
+    background-color: #696969;
+}
+.menu ul{
+    height: 35px;
+    /* float: none; */
+    position: relative;
+    padding: 0 50px 0 0;
+
+}
+.menu ul li{
+    display: inline;
+    float: right;
+    padding: 7px 0 0 45px; /* top hight bottom left*/
+}
+
+.menu ul li a{
+    color: white;
+    text-decoration: none;
+}
+  /* style menu */
+
+
+/* CIRCULAR PROGRESS BAR */
+.circle {
+    position: fixed;
+    top: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    box-sizing: border-box;
+    border: solid 5px rgba(37, 37, 37, 0.438);
+    border-top-color: #16a085;
+    animation: spin 0.7s infinite linear;
+  }
+
+    .sucess{
+        text-align: center;
+        color:#16a085;
+    }
+
+  
+  @keyframes bouncy {
+    40% {
+      height: 40px;
+    }
+    50% {
+      transform: translate(0, 65px);
+      height: 34px;
+      border-radius: 20px;
+    }
+    65% {
+      height: 40px; 
+    }
+  }
+  
+  @keyframes push {
+    50% {
+      margin-left: 56px;
+    }
+  }
+  
+  @keyframes slide {
+    50% {
+      margin-top: 25px;
+    }
+  }
+  
+  @keyframes pulse { 
+    50% { 
+      border-width: 30px;
+    } 
+  }
+  
+  @keyframes spin { 
+    100% { 
+      transform: rotate(360deg); 
+    } 
+  } 
+  
+  @keyframes cross {
+    50% {
+      margin-left: 60px;
+    }
+}
+/* CIRCULAR PROGRESS BAR */
+
+
+
+
+/* style float button */
+.zoom {
+    animation-name: example;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease; 
+
+    position: fixed;
+    top: 150px;
+    right: 10px;
+    height: 70px;
+    z-index: 3;
+  }
+  /* Standard syntax */
+  @keyframes example {
+    75%  {top:0px; top:300px;}
+
+    }
+  .zoom-fab {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: #00BFFF;
+    vertical-align: middle;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.2s ease-out;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    color: #FFF;
+  }
+  
+  .zoom-fab:hover {
+    background-color: #1E90FF;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+  }
+  
+  .zoom-btn-large {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+  }
+  
+  .zoom-menu {
+    position: absolute;
+    right: 70px;
+    left: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    width: 500px;
+    list-style: none;
+    text-align: right;
+  }
+  
+  .zoom-menu li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .zoom-card {
+    position: absolute;
+    right: 150px;
+    bottom: 70px;
+    transition: box-shadow 0.25s;
+    padding: 24px;
+    border-radius: 2px;
+    background-color: #009688;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    color: #FFF;
+  }
+  
+  .zoom-card ul {
+    -webkit-padding-start: 0;
+    list-style: none;
+    text-align: left;
+  }
+
+  /* cores para buttons */
+  .zoom-btn-person { background-color: #2196F3;; }
+
+.zoom-btn-person:hover { background-color: #64b5f6; }
+
+.zoom-btn-doc { background-color: #2196F3;; }
+
+.zoom-btn-doc:hover { background-color: #64b5f6; }
+
+.zoom-btn-tangram { background-color: #2196F3; }
+
+.zoom-btn-tangram:hover { background-color: #64b5f6; }
+
+.zoom-btn-report { background-color: #2196F3; }
+
+.zoom-btn-report:hover { background-color: #64b5f6; }
+
+.zoom-btn-feedback { background-color: #2196F3;; }
+
+.zoom-btn-feedback:hover { background-color: #64b5f6; }
+
+/* escala para os buttons */
+.scale-transition { transition: transform 0.3s cubic-bezier(0.53, 0.01, 0.36, 1.63) !important; }
+
+.scale-transition.scale-out {
+  transform: scale(0);
+  transition: transform 0.2s !important;
+}
+
+.scale-transition.scale-in { transform: scale(1); }
+
+/* style float button */

@@ -3,13 +3,22 @@
 {% load static %}
 {% load poll_extras %}
 
+<head>
+    <!-- float menu button -->
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="collapzion.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="collapzion.min.js"></script>
+
+</head>
+
 {% block content %}
     <body>
 
         <!-- Cabeçalho -->
-        <div class="jumbotron text-center">
+        <div class="jumbotron jumbotron-fluid">
             <div class="logo">
-                <img src="{% static "blog/img/logo.png" %}" width="70">
+                <img class="logo" src="{% static "blog/img/logo.png" %}" width="50">
             </div><!-- Fim Logo -->
 
             <div class="cabecalho">
@@ -17,15 +26,88 @@
                 <h5>Agendamento dos Laboratórios de Informática</h5>
                 <p>{{ msg }}</p> 
                 <!-- <p>{{ post }}</p>  -->
+                
             </div>
+<!-- 
+            <div class="menu">
+                <ul>
+                    <li><a href="#" data-toggle="modal" data-target="#myModal" >Agendar</a></li>
+                    <li><a href="#">Sobre</a></li>
+                    <li><a href="\">Home</a></li>
+                </ul>
+            </div> -->
 
-            <div class="btn_novo">
+            <!-- <div class="btn_novo">
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agendar</button>
-            </div><!--Fim btn-->
+            </div> -->
+            <!--Fim btn-->
+            
 
             <!-- <a href="#" onclick="overlay()">Click para interagir!</a> -->
+
+            
             
         </div><!--Fim Cabeçalho -->
+
+        <!-- Float button -->
+        <div id="div2" class="zoom">
+            <a class="zoom-fab zoom-btn-large" id="zoomBtn">
+                <img src="https://img.icons8.com/ios/50/ffffff/menu-filled.png" width="30"></a>
+            <ul class="zoom-menu">
+                
+                <!-- <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out">2</a></li> -->
+                <!--Sobre-->
+                <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out">
+                        <img src="https://img.icons8.com/material-rounded/50/ffffff/about.png" width="26"></a></li>
+                <!--Contato-->
+                <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out">
+                    <img src="https://img.icons8.com/metro/50/ffffff/contacts.png" width="26"></a></li>                
+                <!--Laboratórios-->
+                <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out">
+                        <img src="https://img.icons8.com/ios/50/ffffff/workstation-filled.png"width="26"></a></li>
+                <!--Agendar-->
+                <li><a href="#" data-toggle="modal" data-target="#myModal" class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out">
+                        <img src="https://img.icons8.com/ios/50/ffffff/plus-math-filled.png" width="30"></a></li>
+            </ul>
+            <!-- <div class="zoom-card scale-transition scale-out">
+                <ul class="zoom-card-content">
+                <li>Content 1</li>
+                <li>Content 2</li>
+                <li>Content 3</li>
+                <li>Content 4</li>
+                <li>Content 5</li>
+                </ul>
+            </div> -->
+        </div>
+        <script>
+            $('#zoomBtn').click(function() {
+            $('.zoom-btn-sm').toggleClass('scale-out');
+            if (!$('.zoom-card').hasClass('scale-out')) {
+                $('.zoom-card').toggleClass('scale-out');
+            }
+            });
+
+            $('.zoom-btn-sm').click(function() {
+            var btn = $(this);
+            var card = $('.zoom-card');
+            if ($('.zoom-card').hasClass('scale-out')) {
+                $('.zoom-card').toggleClass('scale-out');
+            }
+            if (btn.hasClass('zoom-btn-person')) {
+                // card.css('background-color', '#d32f2f');
+
+            } else if (btn.hasClass('zoom-btn-doc')) {
+                card.css('background-color', '#fbc02d');
+            } else if (btn.hasClass('zoom-btn-tangram')) {
+                card.css('background-color', '#388e3c');
+            } else if (btn.hasClass('zoom-btn-report')) {
+                card.css('background-color', '#1976d2');
+            } else {
+                card.css('background-color', '#7b1fa2');
+            }
+            });        
+        </script>
+        <!-- Float button -->
 
         <!-- Container dados do agendamento-->
         <div class="container">
@@ -66,7 +148,7 @@
         <div class="container">          
             
             <!-- Modal -->
-            <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal fade" id="myModal" role="dialog" data-backdrop="static"> <!--data-backdrop="static" trava modal-->
                 <div class="modal-dialog">
                 
                 <!-- Modal content-->
@@ -140,6 +222,68 @@
             </div>
             
         </div><!--Fim Modal-->
+
+        <!-- Modal Sucess -->
+        <div id="myModalsucess" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- inserindo modal 27/07/2018 -->
+                <div class="modal-content">
+                    <div class="modal-body">
+
+                        <div class="sucess">
+                            <h3>Salvo com Sucesso!</h3>  
+                        </div>
+
+                        <div class="circle"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Error -->
+        <div id="myModalError" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- inserindo modal 27/07/2018 -->
+                    <div class="modal-content">
+                        <div class="modal-body">
+    
+                            <div class="sucess">
+                                <h3>Já está agendado para data atual!</h3> 
+                            </div>
+    
+                            <div class="circle"></div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+
+        {% if form_error %}
+            <script>
+                // Já está agendado para data atual!!
+                $('#myModalError').modal('show');
+                    setTimeout(function(){
+                        $('#myModalError').modal('hide');
+                        $("#myModal").modal("show");
+                    }, 2000); 
+                
+            </script>              
+        {% endif %}
+
+        {% if form_sucess %}
+            <script>            
+                // alert("Salvo com Sucesso!");
+                $('#myModalsucess').modal('show');
+                    setTimeout(function(){
+                        $('#myModalsucess').modal('hide');
+                        window.location.href = "/";
+                    }, 2000);            
+            </script> 
+        {% endif %}
+
+        
 
         <div id="overlay">
             <div>

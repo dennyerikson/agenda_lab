@@ -17,7 +17,7 @@ def post_list(request):
     data_final = data_inicial.fromordinal(data_inicial.toordinal()+5)
     post = Post.objects.filter(create_date__range=[timezone.now(), data_final]).order_by('create_date')
     
-
+    form_error = False; form_sucess = False
     if request.method == 'POST':
         form = PeriodForm(request.POST)
         if form.is_valid():
@@ -42,13 +42,20 @@ def post_list(request):
                     print('if')
                     postar = form.save(commit=False)
                     postar.save()
-                    return redirect('/')
+                    form_sucess = True
+                    # return redirect('/')
+                else:
+                    form_error = True
                 
             else:  
-                print('elif')              
+                print('else')              
                 postar = form.save(commit=False)
                 postar.save()
-                return redirect('/')
+                form_sucess = True
+                # return redirect('/')
+                
+        else:
+            form_error = True
             
              
     else:
@@ -56,7 +63,7 @@ def post_list(request):
     
 
     # context = {'post':post, 'form':form, 'course':course, 'period':period, 'msg':msg}
-    context = {'post':post, 'form':form}
+    context = {'post':post, 'form':form, 'form_sucess':form_sucess, 'form_error':form_error}
     return render(request, 'blog/post_list.html', context)
 
 
