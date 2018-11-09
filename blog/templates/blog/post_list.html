@@ -28,6 +28,53 @@
                 <!-- <p>{{ post }}</p>  -->
                 
             </div>
+            <div class="panel-group">
+                <div class="panel">
+                      
+                    <div id="collapse" class="collapse">                                                
+                        <div class="panel-body">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a>Pesquisa entre um intervalo de datas</a>
+                                </h4>
+                            </div>
+                            
+                            <!-- <input class="iconInput" type="text" id="sarch_init" placeholder="__/__/__"/>
+                           
+                            <input class="iconInput" type="text" id="search_final" placeholder="__/__/__"> -->
+
+                            <form id="search_form" class="form-inline" method="GET" action="">
+                                <div class="iconInput">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                    <input type="text" name="qi" class="form-control" placeholder="__/__/__" />                                
+                                </div>
+
+                                <div class="iconInput">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                    <input type="text" name="qf" class="form-control" placeholder="__/__/__" />                                
+                                </div>
+
+                                <input type="text" name="qc" placeholder="Curso">
+<!-- 
+                                <input type="text" name="ql" placeholder="Lab">
+
+                                <input type="text" name="qu" placeholder="Unidade">
+
+                                <input type="text" name="qp" placeholder="Período"> -->
+
+                                <input type="submit" value="Search">
+                                    <!-- <span class="glyphicon glyphicon-search"></span> -->
+                                
+                            </form>                            
+                        </div>
+                        
+                        <a id="btn-up" data-toggle="collapse" data-target="#collapse" href="#">
+                            <span class="glyphicon glyphicon-menu-up"></span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
 <!-- 
             <div class="menu">
                 <ul>
@@ -60,7 +107,7 @@
                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out">
                         <img src="https://img.icons8.com/material-rounded/50/ffffff/about.png" width="26"></a></li>
                 <!--Contato-->
-                <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out">
+                <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out" data-toggle="collapse" data-target="#collapse">
                     <img src="https://img.icons8.com/metro/50/ffffff/contacts.png" width="26"></a></li>                
                 <!--Laboratórios-->
                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out">

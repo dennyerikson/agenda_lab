@@ -15,7 +15,34 @@ def post_list(request):
  
     data_inicial = timezone.now()
     data_final = data_inicial.fromordinal(data_inicial.toordinal()+5)
-    post = Post.objects.filter(create_date__range=[timezone.now(), data_final]).order_by('create_date')
+
+    #get consulta por data
+    data_init = request.GET.get('qi')
+    data_finish = request.GET.get('qf')
+    data_course = request.GET.get('qc')
+    # data_lab = request.GET.get('qc')
+    # data_uni = request.GET.get('qu')
+    # data_period = request.GET.get('qp')
+
+    if data_init and data_finish or data_course:
+        post = Post.objects.filter(
+            Q(create_date__range=[data_init, data_finish]) |
+            
+            Q(create_date__range=[data_init, data_finish]),
+            Q(course=data_course)
+
+            # Q(create_date__range=[data_init, data_finish]),
+            # Q(course=data_course), Q(lab=data_lab) |
+
+            # Q(create_date__range=[data_init, data_finish]),
+            # Q(course=data_course), Q(lab=data_lab), Q(unidade=data_uni) |
+
+            # Q(create_date__range=[data_init, data_finish]), Q(course=data_course), 
+            # Q(lab=data_lab), Q(unidade=data_uni), Q(period=data_period)
+        
+        ).order_by('create_date')
+    else:
+        post = Post.objects.filter(create_date__range=[timezone.now(), data_final]).order_by('create_date')
     
     form_error = False; form_sucess = False
     if request.method == 'POST':
