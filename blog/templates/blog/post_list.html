@@ -44,17 +44,72 @@
                             <input class="iconInput" type="text" id="search_final" placeholder="__/__/__"> -->
 
                             <form id="search_form" class="form-inline" method="GET" action="">
-                                <div class="iconInput">
+                                <!-- <div class="iconInput">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                     <input type="text" name="qi" class="form-control" placeholder="__/__/__" />                                
-                                </div>
+                                </div> -->
 
-                                <div class="iconInput">
+                                <!-- <div class="iconInput">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                     <input type="text" name="qf" class="form-control" placeholder="__/__/__" />                                
-                                </div>
+                                </div> -->
 
-                                <input type="text" name="qc" placeholder="Curso">
+                                <!-- <input type="text" name="qc" placeholder="Curso"> -->
+
+                               
+                               
+                                    <div class='input-group date' id='datetimepicker6'>
+                                        <input name="qi" type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>                           
+                            
+                            
+                                    <div class='input-group date' id='datetimepicker7'>
+                                        <input name="qf" type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                    
+                                
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#datetimepicker6').datetimepicker(
+                                            {
+                                                useCurrent: false,
+                                            format: 'YYYY-MM-DD',
+                                        }
+                                        );
+                                        $('#datetimepicker7').datetimepicker({
+                                            useCurrent: false, //Important! See issue #1075
+                                            format: 'YYYY-MM-DD'
+                                        });
+                                        $("#datetimepicker6").on("dp.change", function (e) {
+                                            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                                        });
+                                        $("#datetimepicker7").on("dp.change", function (e) {
+                                            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                                        });
+                                    });
+
+                                    $('input').datetimepicker({
+                                    beforeShow:function(input) {
+                                        $(input).css({
+                                            "z-index": 999999
+                                        });
+                                    }
+                                });
+                                </script>
+                               
+                                <select class="select" name="qc" maxlength="2" id="qc">
+                                    {% for course in courses %}
+                                        <option value="{{ course.value }}">{{ course.name }}</option>
+                                       
+                                    {% endfor %}
+                                </select>
+                                
 <!-- 
                                 <input type="text" name="ql" placeholder="Lab">
 
@@ -62,7 +117,11 @@
 
                                 <input type="text" name="qp" placeholder="Período"> -->
 
-                                <input type="submit" value="Search">
+                                <button type="submit" type="button" class="btn btn-info">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                  </button>
+
+                                <!-- <input type="submit" value="Search"> -->
                                     <!-- <span class="glyphicon glyphicon-search"></span> -->
                                 
                             </form>                            
@@ -95,6 +154,7 @@
             
             
         </div><!--Fim Cabeçalho -->
+        <br>
 
         <!-- Float button -->
         <div id="div2" class="zoom">
@@ -108,7 +168,7 @@
                         <img src="https://img.icons8.com/material-rounded/50/ffffff/about.png" width="26"></a></li>
                 <!--Contato-->
                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out" data-toggle="collapse" data-target="#collapse">
-                    <img src="https://img.icons8.com/metro/50/ffffff/contacts.png" width="26"></a></li>                
+                    <img src="https://img.icons8.com/ios/50/ffffff/search-filled.png" width="26"></a></li>                
                 <!--Laboratórios-->
                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out">
                         <img src="https://img.icons8.com/ios/50/ffffff/workstation-filled.png"width="26"></a></li>

@@ -399,19 +399,32 @@
   color: white;
 }
 
-.panel-group input{
-  padding-left: 28px;
-  text-align: left;
-  height: 26px;
-  width: 100px;
-  margin: 15px 10px 25px 10px; /* top right bottom left*/
+.input-group input{
+  width: 50px;
+  margin: 0 5px 0 5px;
+  margin-right: 10px;
+  z-index: 1000;
+}
+.btn{
+  background-color: #DCDCDC;
+  color: #696969;
+}
+.btn:hover{
+  background-color: #A9A9A9;
 }
 
-.iconInput { position: relative;}
-.iconInput input { padding-left: 28px }
-.iconInput i { position: absolute; padding: 20px 10px; margin-left: 3px; color:grey }
-.form-inline a{color: white}
-.collapse #btn-up{padding: 1px 0 0 96%}
+.jumbotron{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  margin-bottom: 15px;
+  z-index: 2;
+}
+
+.select{
+  margin: 5px;
+}
 
 
 /*               painel collapse              */

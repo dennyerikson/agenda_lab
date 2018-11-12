@@ -24,7 +24,8 @@ def post_list(request):
     # data_uni = request.GET.get('qu')
     # data_period = request.GET.get('qp')
 
-    if data_init and data_finish or data_course:
+    if data_init and data_finish and data_course or data_init and data_finish:
+
         post = Post.objects.filter(
             Q(create_date__range=[data_init, data_finish]) |
             
@@ -88,9 +89,10 @@ def post_list(request):
     else:
         form = PeriodForm()
     
+    courses = Courses.objects.all()
 
     # context = {'post':post, 'form':form, 'course':course, 'period':period, 'msg':msg}
-    context = {'post':post, 'form':form, 'form_sucess':form_sucess, 'form_error':form_error}
+    context = {'post':post, 'form':form, 'form_sucess':form_sucess, 'form_error':form_error, 'courses':courses}
     return render(request, 'blog/post_list.html', context)
 
 
