@@ -59,7 +59,7 @@
                                
                                
                                     <div class='input-group date' id='datetimepicker6'>
-                                        <input name="qi" type='text' class="form-control" />
+                                        <input name="qi" type='text' class="form-control" placeholder=" Data inicial"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -67,7 +67,7 @@
                             
                             
                                     <div class='input-group date' id='datetimepicker7'>
-                                        <input name="qf" type='text' class="form-control" />
+                                        <input name="qf" type='text' class="form-control" placeholder=" Data final"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -117,7 +117,7 @@
 
                                 <input type="text" name="qp" placeholder="Período"> -->
 
-                                <button type="submit" type="button" class="btn btn-info">
+                                <button type="submit" type="button" class="btn btn-info" onclick='overlay_visible()'>
                                     <span class="glyphicon glyphicon-search"></span>
                                   </button>
 
@@ -127,7 +127,7 @@
                             </form>                            
                         </div>
                         
-                        <a id="btn-up" data-toggle="collapse" data-target="#collapse" href="#">
+                        <a id="btn-up" data-toggle="collapse" data-target="#collapse" href="#" onclick='overlay_visible()'>
                             <span class="glyphicon glyphicon-menu-up"></span>
                         </a>
 
@@ -155,6 +155,15 @@
             
         </div><!--Fim Cabeçalho -->
         <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
         <!-- Float button -->
         <div id="div2" class="zoom">
@@ -166,8 +175,8 @@
                 <!--Sobre-->
                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out">
                         <img src="https://img.icons8.com/material-rounded/50/ffffff/about.png" width="26"></a></li>
-                <!--Contato-->
-                <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out" data-toggle="collapse" data-target="#collapse">
+                <!--Pesquisa-->
+                <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out" data-toggle="collapse" data-target="#collapse" onclick='overlay()'>
                     <img src="https://img.icons8.com/ios/50/ffffff/search-filled.png" width="26"></a></li>                
                 <!--Laboratórios-->
                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out">
@@ -188,10 +197,11 @@
         </div>
         <script>
             $('#zoomBtn').click(function() {
-            $('.zoom-btn-sm').toggleClass('scale-out');
-            if (!$('.zoom-card').hasClass('scale-out')) {
-                $('.zoom-card').toggleClass('scale-out');
-            }
+                $('.zoom-btn-sm').toggleClass('scale-out');
+
+                if (!$('.zoom-card').hasClass('scale-out')) {
+                    $('.zoom-card').toggleClass('scale-out');
+                }
             });
 
             $('.zoom-btn-sm').click(function() {
@@ -403,8 +413,22 @@
 
         <script>
             function overlay(){
-                el = document.getElementById("overlay");
-                el.style.visibility = (el.style.visibility == "visible")? "hidden":"visible"
+                el = document.getElementById("div2");
+                // el.style.visibility = (el.style.visibility == "visible")? "hidden":"visible"
+                el.style.visibility = "hidden"
+
+                $('.zoom-btn-sm').toggleClass('scale-out');
+                if (!$('.zoom-card').hasClass('scale-out')) {
+                $('.zoom-card').toggleClass('scale-out');
+                }
+            }
+        </script>
+
+        <script>
+            function overlay_visible(){
+                el = document.getElementById("div2");
+                // el.style.visibility = (el.style.visibility == "visible")? "hidden":"visible"
+                el.style.visibility = "visible"
             }
         </script>
 
