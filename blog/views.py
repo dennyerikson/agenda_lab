@@ -6,7 +6,7 @@ from .forms import PeriodForm
 import platform
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
-from django.db.models import Q
+from django.db.models import Q, Count
 
 # Create your views here.
 def post_list(request):
@@ -99,6 +99,45 @@ def post_list(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
+
+def post_graphs(request):
+    post = Post.objects.filter(create_date__range=['2018-07-01',timezone.now()])\
+        .values('course')\
+        .annotate(value=Count('course'))
+
+    qnt_post = Post.objects.all().count()
+
+    lista = [{'course': item['course'], 'quantidade': item['value']}
+        for item in post]
+
+    context = {'cursos':lista}
+    return render(request, 'blog/post_graphs.html', context)
+
+def curso_graphic(request):
+    return render(request, 'blog/curso_graphic.html')
+
+# import json
+# from django.http import HttpResponse, JsonResponse
+# def curso_json(request):
+#      # minha query onde obtenho os dados
+#     post = Post.objects.filter(create_date__range=['2018-07-01',timezone.now()])\
+#         .values('course')\
+#         .annotate(value=Count('course'))
+
+#     qnt_post = Post.objects.all().count()
+
+#     lista = [{'course': item['course'], 'quantidade': item['value']}
+#         for item in post]
+#     return JsonResponse({'cursos':lista})
+
+#     post = [ # obtenho um for com converção dos dados para dicionario 
+#         post_serializer(posts)
+#         for posts in post
+#     ]
+#     print(len(post))
+#     return HttpResponse(json.dumps(post), content_type='application/json')
+# def post_serializer(posts): #serealiza para dicionário
+#     return {'curso':posts.course, }
 
 
 # def event(request):

@@ -29,7 +29,7 @@
                 
             </div>
             <div class="panel-group">
-                <div class="panel">
+                <div class="panel"><!-- Inicio painel -->
                       
                     <div id="collapse" class="collapse">                                                
                         <div class="panel-body">
@@ -38,26 +38,9 @@
                                     <a>Pesquisa entre um intervalo de datas</a>
                                 </h4>
                             </div>
-                            
-                            <!-- <input class="iconInput" type="text" id="sarch_init" placeholder="__/__/__"/>
-                           
-                            <input class="iconInput" type="text" id="search_final" placeholder="__/__/__"> -->
 
                             <form id="search_form" class="form-inline" method="GET" action="">
-                                <!-- <div class="iconInput">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                    <input type="text" name="qi" class="form-control" placeholder="__/__/__" />                                
-                                </div> -->
 
-                                <!-- <div class="iconInput">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                    <input type="text" name="qf" class="form-control" placeholder="__/__/__" />                                
-                                </div> -->
-
-                                <!-- <input type="text" name="qc" placeholder="Curso"> -->
-
-                               
-                               
                                     <div class='input-group date' id='datetimepicker6'>
                                         <input name="qi" type='text' class="form-control" placeholder=" Data inicial"/>
                                         <span class="input-group-addon">
@@ -110,56 +93,22 @@
                                     {% endfor %}
                                 </select>
                                 
-<!-- 
-                                <input type="text" name="ql" placeholder="Lab">
-
-                                <input type="text" name="qu" placeholder="Unidade">
-
-                                <input type="text" name="qp" placeholder="Período"> -->
-
                                 <button type="submit" type="button" class="btn btn-info" onclick='overlay_visible()'>
                                     <span class="glyphicon glyphicon-search"></span>
                                   </button>
-
-                                <!-- <input type="submit" value="Search"> -->
-                                    <!-- <span class="glyphicon glyphicon-search"></span> -->
                                 
                             </form>                            
-                        </div>
+                        </div><!-- body painel -->
                         
                         <a id="btn-up" data-toggle="collapse" data-target="#collapse" href="#" onclick='overlay_visible()'>
                             <span class="glyphicon glyphicon-menu-up"></span>
                         </a>
 
-                    </div>
-                </div>
-            </div>
-<!-- 
-            <div class="menu">
-                <ul>
-                    <li><a href="#" data-toggle="modal" data-target="#myModal" >Agendar</a></li>
-                    <li><a href="#">Sobre</a></li>
-                    <li><a href="\">Home</a></li>
-                </ul>
-            </div> -->
+                    </div><!-- Fim collpse -->
+                </div><!-- Fim painel -->
 
-            <!-- <div class="btn_novo">
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Agendar</button>
-            </div> -->
-            <!--Fim btn-->
-            
+            </div><!--Fim Cabeçalho -->
 
-            <!-- <a href="#" onclick="overlay()">Click para interagir!</a> -->
-
-            
-            
-        </div><!--Fim Cabeçalho -->
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
         <br>
         <br>
         <br>
@@ -173,7 +122,7 @@
                 
                 <!-- <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out">2</a></li> -->
                 <!--Sobre-->
-                <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out">
+                <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out" href=" {% url 'post_graphs' %}">
                         <img src="https://img.icons8.com/material-rounded/50/ffffff/about.png" width="26"></a></li>
                 <!--Pesquisa-->
                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out" data-toggle="collapse" data-target="#collapse" onclick='overlay()'>
