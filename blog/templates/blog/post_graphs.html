@@ -1,5 +1,19 @@
+{% extends 'blog/base.html' %}
 {% load staticfiles %}
 {% load static %}
+{% load poll_extras %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -10,8 +24,9 @@
   </head>
 
   <body>
-
-    <div id="container" style="min-width: 400px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+    
+      <div id="container" style="min-width: 400px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+    
   </body>
 
 </html>
@@ -21,6 +36,6 @@
 <script src="https://code.highcharts.com/modules/drilldown.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="{% static 'js/curso_graphic.js' %}"></script>
-
+{% endblock %}
 
 

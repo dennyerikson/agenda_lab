@@ -31,13 +31,200 @@
 
             <!-- <a href="https://icons8.com">Icon pack by Icons8</a> -->
 
-            
+            <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link rel="stylesheet" href="collapzion.min.css">
+            <script src="jquery.min.js"></script>
+            <script src="collapzion.min.js"></script>
                         
         </head>
 
         <body>
+            <!-- Cabeçalho -->
+            <div class="jumbotron jumbotron-fluid">
+                <div class="logo">
+                    <img class="logo" src="{% static "blog/img/logo.png" %}" width="50">
+                </div><!-- Fim Logo -->
+    
+                <div class="cabecalho">
+                    <h1>Agenda FAT</h1>
+                    <h5>Agendamento dos Laboratórios de Informática</h5>
+                    <p>{{ msg }}</p>
+    
+                </div>
+                <div class="panel-group">
+                    <div class="panel">
+    
+                        <div id="collapse" class="collapse">
+                            <div class="panel-body">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a>Pesquisa entre um intervalo de datas</a>
+                                    </h4>
+                                </div>
+    
+                                <form id="search_form" class="form-inline" method="GET" action="">
+                                
+                                        <div class='input-group date' id='datetimepicker6'>
+                                            <input name="qi" type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+    
+    
+                                        <div class='input-group date' id='datetimepicker7'>
+                                            <input name="qf" type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+    
+    
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#datetimepicker6').datetimepicker(
+                                                {
+                                                    useCurrent: false,
+                                                format: 'YYYY-MM-DD',
+                                            }
+                                            );
+                                            $('#datetimepicker7').datetimepicker({
+                                                useCurrent: false, //Important! See issue #1075
+                                                format: 'YYYY-MM-DD'
+                                            });
+                                            $("#datetimepicker6").on("dp.change", function (e) {
+                                                $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                                            });
+                                            $("#datetimepicker7").on("dp.change", function (e) {
+                                                $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                                            });
+                                        });
+    
+                                        $('input').datetimepicker({
+                                        beforeShow:function(input) {
+                                            $(input).css({
+                                                "z-index": 999999
+                                            });
+                                        }
+                                    });
+                                    </script>
+    
+                                    <select class="select" name="qc" maxlength="2" id="qc">
+                                        {% for course in courses %}
+                                            <option value="{{ course.value }}">{{ course.name }}</option>
+    
+                                        {% endfor %}
+                                    </select>
+    
+                                    <button type="submit" type="button" class="btn btn-info">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                      </button>
+    
+                                </form>
+                            </div>
+    
+                            <a id="btn-up" data-toggle="collapse" data-target="#collapse" href="#">
+                                <span class="glyphicon glyphicon-menu-up"></span>
+                            </a>
+    
+                        </div>
+                    </div>
+                </div>
+            </div><!--Fim Cabeçalho -->
+
+             <!-- Float button -->
+        <div id="div2" class="zoom">
+                <a class="zoom-fab zoom-btn-large" id="zoomBtn">
+                    <img src="https://img.icons8.com/ios/50/ffffff/menu-filled.png" width="26"></a>
+                <ul class="zoom-menu">
+    
+                    <!-- <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out">2</a></li> -->
+                    
+
+                        <!-- <script src="jquery.js"></script> 
+                        <script>
+                        $(document).ready(function() {
+                            var url = location.href;
+                            if(url.indexOf("")==-1) {
+                            } else {
+                                alert("sim a plavra semestre existe na url");
+                            }
+                            });
+                        </script> -->
+
+                    {% if request.get_full_path == "/semestre/" or request.get_full_path == "/post_graphs/" %}
+                        <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out" href="{% url 'post_list' %}">
+                            <img src="https://img.icons8.com/material-rounded/50/ffffff/home.png" width="24"></a></li>
+                        <!--Contato-->
+                    {% else %}
+                    <!--lock-->                    
+                        <li>
+                            <a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out" href="{% url 'semestre' %}">
+                                {% if user.is_authenticated %}
+                                    <img src="https://img.icons8.com/material/32/ffffff/unlock.png" width="24">
+                                {% else %}                    
+                                    <img src="https://img.icons8.com/material-rounded/30/ffffff/lock.png" width="24">
+                                {% endif %}
+                            </a>
+                        </li>
+                        <!--Sobre-->
+                        <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out" href="{% url 'post_graphs' %}">
+                            <img src="https://img.icons8.com/material-rounded/50/ffffff/about.png" width="24"></a></li>
+                        <!--Contato-->
+                        <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out" data-toggle="collapse" data-target="#collapse">
+                            <img src="https://img.icons8.com/ios/50/ffffff/search-filled.png" width="24"></a></li>
+                        <!--Laboratórios-->
+                        <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out">
+                            <img src="https://img.icons8.com/material-rounded/50/ffffff/workstation-filled.png"width="24"></a></li>
+                        <!--Agendar-->
+                        <li><a href="#" data-toggle="modal" data-target="#myModal" class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out">
+                            <img src="https://img.icons8.com/material-rounded/50/ffffff/plus-math-filled.png" width="30"></a></li>
+                    {% endif %}
+                </ul>
+                <!-- <div class="zoom-card scale-transition scale-out">
+                    <ul class="zoom-card-content">
+                    <li>Content 1</li>
+                    <li>Content 2</li>
+                    <li>Content 3</li>
+                    <li>Content 4</li>
+                    <li>Content 5</li>
+                    </ul>
+                </div> -->
+            </div>
+            <script>
+                $('#zoomBtn').click(function() {
+                $('.zoom-btn-sm').toggleClass('scale-out');
+                if (!$('.zoom-card').hasClass('scale-out')) {
+                    $('.zoom-card').toggleClass('scale-out');
+                }
+                });
+    
+                $('.zoom-btn-sm').click(function() {
+                var btn = $(this);
+                var card = $('.zoom-card');
+                if ($('.zoom-card').hasClass('scale-out')) {
+                    $('.zoom-card').toggleClass('scale-out');
+                }
+                if (btn.hasClass('zoom-btn-person')) {
+                    // card.css('background-color', '#d32f2f');
+    
+                } else if (btn.hasClass('zoom-btn-doc')) {
+                    card.css('background-color', '#fbc02d');
+                } else if (btn.hasClass('zoom-btn-tangram')) {
+                    card.css('background-color', '#388e3c');
+                } else if (btn.hasClass('zoom-btn-report')) {
+                    card.css('background-color', '#1976d2');
+                } else {
+                    card.css('background-color', '#7b1fa2');
+                }
+                });
+            </script>
+            <!-- Float button -->
+    
             {% block content %}
             {% endblock %}
+
+           
         </body>
 
 </html>

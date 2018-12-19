@@ -15,166 +15,17 @@
 {% block content %}
     <body>
 
-        <!-- Cabeçalho -->
-        <div class="jumbotron jumbotron-fluid">
-            <div class="logo">
-                <img class="logo" src="{% static "blog/img/logo.png" %}" width="50">
-            </div><!-- Fim Logo -->
-
-            <div class="cabecalho">
-                <h1>Agenda FAT</h1>
-                <h5>Agendamento dos Laboratórios de Informática</h5>
-                <p>{{ msg }}</p> 
-                <!-- <p>{{ post }}</p>  -->
-                
-            </div>
-            <div class="panel-group">
-                <div class="panel"><!-- Inicio painel -->
-                      
-                    <div id="collapse" class="collapse">                                                
-                        <div class="panel-body">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a>Pesquisa entre um intervalo de datas</a>
-                                </h4>
-                            </div>
-
-                            <form id="search_form" class="form-inline" method="GET" action="">
-
-                                    <div class='input-group date' id='datetimepicker6'>
-                                        <input name="qi" type='text' class="form-control" placeholder=" Data inicial"/>
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>                           
-                            
-                            
-                                    <div class='input-group date' id='datetimepicker7'>
-                                        <input name="qf" type='text' class="form-control" placeholder=" Data final"/>
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                    
-                                
-                                <script type="text/javascript">
-                                    $(function () {
-                                        $('#datetimepicker6').datetimepicker(
-                                            {
-                                                useCurrent: false,
-                                            format: 'YYYY-MM-DD',
-                                        }
-                                        );
-                                        $('#datetimepicker7').datetimepicker({
-                                            useCurrent: false, //Important! See issue #1075
-                                            format: 'YYYY-MM-DD'
-                                        });
-                                        $("#datetimepicker6").on("dp.change", function (e) {
-                                            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-                                        });
-                                        $("#datetimepicker7").on("dp.change", function (e) {
-                                            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-                                        });
-                                    });
-
-                                    $('input').datetimepicker({
-                                    beforeShow:function(input) {
-                                        $(input).css({
-                                            "z-index": 999999
-                                        });
-                                    }
-                                });
-                                </script>
-                               
-                                <select class="select" name="qc" maxlength="2" id="qc">
-                                    {% for course in courses %}
-                                        <option value="{{ course.value }}">{{ course.name }}</option>
-                                       
-                                    {% endfor %}
-                                </select>
-                                
-                                <button type="submit" type="button" class="btn btn-info" onclick='overlay_visible()'>
-                                    <span class="glyphicon glyphicon-search"></span>
-                                  </button>
-                                
-                            </form>                            
-                        </div><!-- body painel -->
-                        
-                        <a id="btn-up" data-toggle="collapse" data-target="#collapse" href="#" onclick='overlay_visible()'>
-                            <span class="glyphicon glyphicon-menu-up"></span>
-                        </a>
-
-                    </div><!-- Fim collpse -->
-                </div><!-- Fim painel -->
-
-            </div><!--Fim Cabeçalho -->
-
         <br>
         <br>
         <br>
         <br>
-
-        <!-- Float button -->
-        <div id="div2" class="zoom">
-            <a class="zoom-fab zoom-btn-large" id="zoomBtn">
-                <img src="https://img.icons8.com/ios/50/ffffff/menu-filled.png" width="30"></a>
-            <ul class="zoom-menu">
-                
-                <!-- <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out">2</a></li> -->
-                <!--Sobre-->
-                <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out" href=" {% url 'post_graphs' %}">
-                        <img src="https://img.icons8.com/material-rounded/50/ffffff/about.png" width="26"></a></li>
-                <!--Pesquisa-->
-                <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out" data-toggle="collapse" data-target="#collapse" onclick='overlay()'>
-                    <img src="https://img.icons8.com/ios/50/ffffff/search-filled.png" width="26"></a></li>                
-                <!--Laboratórios-->
-                <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out">
-                        <img src="https://img.icons8.com/ios/50/ffffff/workstation-filled.png"width="26"></a></li>
-                <!--Agendar-->
-                <li><a href="#" data-toggle="modal" data-target="#myModal" class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out">
-                        <img src="https://img.icons8.com/ios/50/ffffff/plus-math-filled.png" width="30"></a></li>
-            </ul>
-            <!-- <div class="zoom-card scale-transition scale-out">
-                <ul class="zoom-card-content">
-                <li>Content 1</li>
-                <li>Content 2</li>
-                <li>Content 3</li>
-                <li>Content 4</li>
-                <li>Content 5</li>
-                </ul>
-            </div> -->
-        </div>
-        <script>
-            $('#zoomBtn').click(function() {
-                $('.zoom-btn-sm').toggleClass('scale-out');
-
-                if (!$('.zoom-card').hasClass('scale-out')) {
-                    $('.zoom-card').toggleClass('scale-out');
-                }
-            });
-
-            $('.zoom-btn-sm').click(function() {
-            var btn = $(this);
-            var card = $('.zoom-card');
-            if ($('.zoom-card').hasClass('scale-out')) {
-                $('.zoom-card').toggleClass('scale-out');
-            }
-            if (btn.hasClass('zoom-btn-person')) {
-                // card.css('background-color', '#d32f2f');
-
-            } else if (btn.hasClass('zoom-btn-doc')) {
-                card.css('background-color', '#fbc02d');
-            } else if (btn.hasClass('zoom-btn-tangram')) {
-                card.css('background-color', '#388e3c');
-            } else if (btn.hasClass('zoom-btn-report')) {
-                card.css('background-color', '#1976d2');
-            } else {
-                card.css('background-color', '#7b1fa2');
-            }
-            });        
-        </script>
-        <!-- Float button -->
-
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+       
         <!-- Container dados do agendamento-->
         <div class="container">
             <div class="row">
@@ -202,24 +53,24 @@
                     <!-- <img src="https://png.icons8.com/ios-glyphs/50/000000/moon-symbol.png"> -->
                     <!-- <img src="https://png.icons8.com/ios-glyphs/50/000000/sun.png"> -->
 
-                    </div>   
+                    </div>
                 </div>
                 {% endfor %}
-                
+
             </div>
         </div><!-- Fim Container dados do agendamento-->
-        
-    
+
+
         <!--Modal para adicionar evento-->
-        <div class="container">          
-            
+        <div class="container">
+
             <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog" data-backdrop="static"> <!--data-backdrop="static" trava modal-->
                 <div class="modal-dialog">
-                
+
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="modal-header">                    
+                    <div class="modal-header">
                     <h4 class="modal-title">Cadastrar agendamento</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
@@ -236,7 +87,7 @@
 
                         <!-- <script>
                          $('#AdminDateWidget').AdminDateWidget({
-                            container:'#myModal',                            
+                            container:'#myModal',
                             });
                         </script> -->
 
@@ -283,10 +134,10 @@
                         <button type="button" class="btn btn-block" data-dismiss="modal">Cancelar</button>
                     </div> -->
                 </div>
-                
+
                 </div>
             </div>
-            
+
         </div><!--Fim Modal-->
 
         <!-- Modal Sucess -->
@@ -297,11 +148,11 @@
                     <div class="modal-body">
 
                         <div class="sucess">
-                            <h3>Salvo com Sucesso!</h3>  
+                            <h3>Salvo com Sucesso!</h3>
                         </div>
 
                         <div class="circle"></div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -313,18 +164,18 @@
                     <!-- inserindo modal 27/07/2018 -->
                     <div class="modal-content">
                         <div class="modal-body">
-    
+
                             <div class="sucess">
-                                <h3>Já está agendado para data atual!</h3> 
+                                <h3>Já está agendado para data atual!</h3>
                             </div>
-    
+
                             <div class="circle"></div>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
-    
+
 
         {% if form_error %}
             <script>
@@ -333,55 +184,41 @@
                     setTimeout(function(){
                         $('#myModalError').modal('hide');
                         $("#myModal").modal("show");
-                    }, 2000); 
-                
-            </script>              
+                    }, 2000);
+
+            </script>
         {% endif %}
 
         {% if form_sucess %}
-            <script>            
+            <script>
                 // alert("Salvo com Sucesso!");
                 $('#myModalsucess').modal('show');
                     setTimeout(function(){
                         $('#myModalsucess').modal('hide');
                         window.location.href = "/";
-                    }, 2000);            
-            </script> 
+                    }, 2000);
+            </script>
         {% endif %}
 
-        
+
 
         <div id="overlay">
             <div>
-                
+
                 <p> Ops já temos um agendamento com essa data </p>
-                
+
                 Clique aqui para [<a href='#' onclick='overlay()'> fechar </a>]
             </div>
         </div><!--Fim overlay-->
 
         <script>
             function overlay(){
-                el = document.getElementById("div2");
-                // el.style.visibility = (el.style.visibility == "visible")? "hidden":"visible"
-                el.style.visibility = "hidden"
-
-                $('.zoom-btn-sm').toggleClass('scale-out');
-                if (!$('.zoom-card').hasClass('scale-out')) {
-                $('.zoom-card').toggleClass('scale-out');
-                }
+                el = document.getElementById("overlay");
+                el.style.visibility = (el.style.visibility == "visible")? "hidden":"visible"
             }
         </script>
 
-        <script>
-            function overlay_visible(){
-                el = document.getElementById("div2");
-                // el.style.visibility = (el.style.visibility == "visible")? "hidden":"visible"
-                el.style.visibility = "visible"
-            }
-        </script>
 
-        
 
     </body>
     {% endblock %}

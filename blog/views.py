@@ -7,6 +7,15 @@ import platform
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.db.models import Q, Count
+from dateutil.relativedelta import *
+from dateutil.rrule import *
+from dateutil.parser import *
+import calendar
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.admin import User
 
 # Create your views here.
 def post_list(request):
@@ -115,6 +124,66 @@ def post_graphs(request):
 
 def curso_graphic(request):
     return render(request, 'blog/curso_graphic.html')
+
+@login_required
+def semestre(request):
+    DIAS=[]
+
+    courses = Courses.objects.all()
+    data_i = request.GET.get('qi')# ano+mês+dia
+    data_f = request.GET.get('qf')# intervalo no SEMESTRE
+    lab = request.GET.get('lab')
+    course = request.GET.get('course')
+    period = request.GET.get('period')
+    unidad = request.GET.get('unidade')
+    details = request.GET.get('details')
+    
+    if data_i and data_f:
+        check_mo = request.GET.get('MO'); check_tu = request.GET.get('TU'); check_we = request.GET.get('WE')
+        check_th = request.GET.get('TH'); check_fr = request.GET.get('FR'); check_sa = request.GET.get('SA')
+        
+        if check_mo:
+            DIAS.append(0)
+        if check_tu:
+            DIAS.append(1)
+        if check_we:
+            DIAS.append(2)
+        if check_th:
+            DIAS.append(3)
+        if check_fr:
+            DIAS.append(4)
+        if check_sa:
+            DIAS.append(5)
+
+        # data_i = "20190101" # ano+mês+dia
+        # data_f = "20190710" # intervalo no SEMESTRE
+
+        lista = list(rrule(MONTHLY, byweekday=DIAS, dtstart=parse(data_i), until=parse(data_f)))
+
+        
+        for data in lista:
+            print('Curso:', course,'|', data)
+            query = Post.objects.create(
+                course = course,
+                name = 'admin',
+                period = period,
+                create_date = data,
+                unidade = unidad,
+                details = details,
+                lab = lab
+            )
+            query.save()
+           
+    else:
+        pass
+    context = {'courses':courses}
+    return render(request, 'blog/post_semestre.html', context)
+
+def FormatData(data):
+    data = data[18:]
+    data = data[:-7]
+    data = data.replace(', ','-')
+    return data
 
 # import json
 # from django.http import HttpResponse, JsonResponse

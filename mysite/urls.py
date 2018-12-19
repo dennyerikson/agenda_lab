@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.i18n import JavaScriptCatalog
+from django.contrib.auth import views
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')), # para chamar apenas as urls do app
     path('jsi18n', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+
+    url('accounts/login/', views.login, {'template_name':'blog/registration/login.html'}, name='login'),
 ]

@@ -1,0 +1,169 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% load poll_extras %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <div class="container" style="text-align:center">
+                <!--Form do agendamento-->
+            <div class="login-page">
+                    <div class="form">    
+                        <form class="pure-form pure-form-aligned" method="GET">
+                            <fieldset>                                
+                                <div class='input-group date' id='datetimepicker8'>
+                                        <input name="qi" type='text' class="form-control" placeholder=" Data inicial"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                            
+                                    <div class='input-group date' id='datetimepicker9'>
+                                        <input name="qf" type='text' class="form-control" placeholder=" Data final"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+    
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#datetimepicker8').datetimepicker(
+                                                {
+                                                    useCurrent: false,
+                                                format: 'YYYY-MM-DD',
+                                            }
+                                            );
+                                            $('#datetimepicker9').datetimepicker({
+                                                useCurrent: false, //Important! See issue #1075
+                                                format: 'YYYY-MM-DD'
+                                            });
+                                            $("#datetimepicker8").on("dp.change", function (e) {
+                                                $('#datetimepicker9').data("DateTimePicker").minDate(e.date);
+                                            });
+                                            $("#datetimepicker9").on("dp.change", function (e) {
+                                                $('#datetimepicker8').data("DateTimePicker").maxDate(e.date);
+                                            });
+                                        });
+                    
+                                        $('input').datetimepicker({
+                                        beforeShow:function(input) {
+                                            $(input).css({
+                                                "z-index": 999999
+                                            });
+                                        }
+                                    });
+                                </script>
+    
+                        <style>
+                            .checkbox{
+                                display: inline-block;
+                                margin: 1%;
+                            }
+                            .checkbox input{
+                                right: 15px
+                            }
+                        </style>
+
+                        <div class="checkbox">                            
+                            <label><input type="checkbox" name="MO" value="MO"> Seg</label>
+                        </div>
+                        <div class="checkbox">                            
+                            <label><input type="checkbox" name="TU" value="TU"> Ter</label>
+                        </div>
+                        <div class="checkbox">                            
+                            <label><input type="checkbox" name="WE" value="WE"> Qua</label>
+                        </div>
+                        <div class="checkbox">                            
+                            <label><input type="checkbox" name="TH" value="TH"> Qui</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="FR" value="FR"> Sex</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="SA" value="SA"> Sab</label>
+                        </div>
+                    
+                        
+                <div class="pure-control-group">
+                    <div class="custon-select">
+                        <label for="id_lab">Laboratório:</label>
+    
+                        <select name="lab" maxlength="2" id="id_lab">
+                            <option value="01">Laboratório - 01</option>
+    
+                        </select>
+                                                    
+                        </div>
+                </div>
+            
+                <div class="pure-control-group">
+                    <div class="custon-select">
+                        <label for="id_course">Curso:</label>
+                        <select name="course" maxlength="2" id="id_course">
+                            {% for course in courses %}
+                                <option value="{{ course.value }}">{{ course.name }}</option>
+                                
+                            {% endfor %}       
+                        </select>
+                                                                    
+                        </div>
+                        </div>
+                    
+                        <div class="pure-control-group">
+                            <div class="custon-select">
+                                <label for="id_period">Periodo:</label>
+                                <select name="period" maxlength="2" id="id_period">
+                                    <option value="" selected>---------</option>
+                                    <option value="01">Matutino</option>                            
+                                    <option value="02">Noturno</option>
+                            
+                                </select>
+                                                                    
+                            </div>
+                        </div>
+                    
+                        <div class="pure-control-group">
+                            <div class="custon-select">
+                                <label for="id_unidade">Unidade:</label>
+                                <select name="unidade" required id="id_unidade">
+                                    <option value="" selected>---------</option>
+                                
+                                    <option value="1">VG</option>
+                                
+                                    <option value="2">CS</option>
+                                
+                                </select>
+                                                                    
+                            </div>
+                        </div>
+                    
+                        <div class="pure-control-group">
+                            <div class="custon-select">
+                                <label for="id_details">Detalhes:</label>
+                                <textarea name="details" cols="40" rows="10" maxlength="150" required id="id_details">
+                                </textarea>
+                                                                    
+                                    </div>
+                                </div>
+                            
+    
+                                <button class="btn btn-info btn-block"  id="btnim" type="submit" class="button">Salvar</button>
+                                <!-- <button class="btn btn-info btn-block"  id="btnim" type="submit" class="button">Cancelar</button> -->
+    
+                        </fieldset>
+                    </form>
+    
+                </div>
+    
+            </div>
+            </div>
+
+{% endblock %}
