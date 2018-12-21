@@ -1,9 +1,21 @@
 from .models import *
 from django import forms
-from django.forms.widgets import Select
+from django.forms.widgets import Select, SelectMultiple
 from django.contrib.admin import widgets
+from django.forms import ModelChoiceField
+
+class MySelectMultiple(forms.Select):
+    def render_option(self, selected_choices, option_value, option_label):
+        # original forms.Select code #
+        return u'<option custom_attribute="foo">...</option>'
+
+class MySelect(forms.Select):
+    def render_option(self, selected_choices, option_value, option_label):
+        # look at the original for something to start with
+        return u'<option custom_attribute="foo">...</option>'
 
 class PeriodForm(forms.ModelForm):
+
     class Meta:
         # Criando choices com models e persistencia
         PERIOD = Period.objects.all()
@@ -11,14 +23,30 @@ class PeriodForm(forms.ModelForm):
         COURSES = Courses.objects.all()
 
         model = Post
-        fields =('create_date','lab','course','name','period','unidade','details')
-
+        fields = ('create_date','unidade','course','lab','period','name','details')
+         
         widgets={
-            'lab':Select(choices=((choice.value, choice.name) for choice in LAB )),
+            
+            # 'lab':MyModelChoiceField(queryset=Labs.objects.all(), widget=CustomSelect(attrs={'class': 'chosen-select'})),
+            'lab':MySelect(choices=((choice.value, choice.name) for choice in LAB)),
             'course':Select(choices=((choice.value, choice.name) for choice in COURSES )),
             'period':Select(choices=((choice.value, choice.name) for choice in PERIOD )),
             'create_date': forms.DateInput(attrs={'class':'datetime-input'}),
         }
+
+        def options(self, name, value, attrs=None):
+            """Yield a flat list of options for this widgets."""
+            for group in self.optgroups(name, value, attrs):
+                yield from group[1]
+
+
+
+
+    # def __init__(self, *args, **kwargs):
+    #     super(PeriodForm, self).__init__(*args, **kwargs)
+    #     self.fields['lab'].widget.attrs.update({
+    #         'data-course': '1'
+    #     })       
 
 
     # def clean_create_date(self):

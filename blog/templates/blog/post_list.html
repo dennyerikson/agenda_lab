@@ -92,6 +92,13 @@
                         </script> -->
 
                         <!--Form do agendamento-->
+                        <!-- """
+                        cs
+                        cc = 3 7 8
+                        out = 2 4 5 6
+
+                        vg = 2 3 4
+                        """ -->
                         <div class="login-page">
                             <div class="form">
 
@@ -126,6 +133,28 @@
                                     format:'YYYY-MM-DD',
                                 })
                             });
+                            
+                            $(function () {
+
+                            // Oculta as opções do segundo select:
+                            $("#t-shift option").hide();
+
+                            // Observa o evento change do primeiro select:
+                            $("#p-shift").on("change", function () {
+
+                            // Recupera o valor selecionado:
+                            let course = $("#p-shift").val();
+                            
+                            // Oculta as opções atuais:
+                            $("#t-shift option").hide();
+                            
+                            // Exibe as opções conforme a seleção:
+                            $("#t-shift option[data-course="+ course +"]").show();
+
+                            });
+
+                            });                          
+
                         </script>
 
                     </div>

@@ -34,6 +34,7 @@ class Period(models.Model):
 class Courses(models.Model):
     value = models.CharField(max_length=2)
     name = models.CharField(max_length=200)
+    
 
     def __str__(self):
         return self.name
@@ -41,6 +42,7 @@ class Courses(models.Model):
 class Labs(models.Model):
     value = models.CharField(max_length=2)
     name = models.CharField(max_length=200)
+    data_course = models.CharField(max_length=2)
 
     def __str__(self):
         return "ID " + self.value +" - "+self.name

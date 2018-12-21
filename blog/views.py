@@ -238,3 +238,7 @@ def FormatData(data):
 #     }
 #     return render(request,'blog/event_management.html',context)
 
+
+
+
+
