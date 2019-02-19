@@ -152,7 +152,7 @@
                             });
                         </script> -->
 
-                    {% if not request.get_full_path == "/" or request.get_full_path == "/semestre/" or request.get_full_path == "/post_graphs/" %}
+                    {% if request.get_full_path == "/semestre/" or request.get_full_path == "/post_graphs/" %}
                         <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out" href="{% url 'post_list' %}">
                             <img src="https://img.icons8.com/material-rounded/50/ffffff/home.png" width="24"></a></li>
                         <!--Contato-->

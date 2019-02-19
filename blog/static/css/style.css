@@ -440,16 +440,3 @@ margin: 5px;
 
 
 /*               painel collapse              */
-
-
-/* style details template */
-.detail-container{
-  position: relative;
-  z-index: 1;
-  background: #FFFFFF;
-  width: 400px;
-  max-width: 400px;
-  padding: 10px;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  margin: 10px auto;
-}
