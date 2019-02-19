@@ -23,7 +23,7 @@ def post_list(request):
     print(platform.system())
  
     data_inicial = timezone.now()
-    data_final = data_inicial.fromordinal(data_inicial.toordinal()+5)
+    data_final = data_inicial.fromordinal(data_inicial.toordinal()+7)
 
     #get consulta por data
     data_init = request.GET.get('qi')
