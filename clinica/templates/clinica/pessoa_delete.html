@@ -1,0 +1,7 @@
+<h1>Confirmação!</h1>
+
+
+<form action="." method="post">{% csrf_token %}
+    <h2>Deseja realmente deletar <br>"{{ object}}"?</h2>
+    <p><input type="submit" value="Yes"> <a href="/clinica">Cancel</a></p>
+</form>

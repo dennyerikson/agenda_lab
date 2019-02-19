@@ -1,0 +1,11 @@
+/* style details template */
+.container-form{
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    width: 80%px;
+    max-width: 80%;
+    padding: 10px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    margin: 10px auto;
+  }

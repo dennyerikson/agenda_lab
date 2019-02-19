@@ -25,4 +25,6 @@ urlpatterns = [
     path('jsi18n', JavaScriptCatalog.as_view(), name='javascript-catalog'),
 
     url('accounts/login/', views.login, {'template_name':'blog/registration/login.html'}, name='login'),
+
+    path('clinica/', include('clinica.urls')), # para chamar apenas as urls do app
 ]
