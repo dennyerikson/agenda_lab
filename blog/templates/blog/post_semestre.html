@@ -11,8 +11,6 @@
 <br>
 <br>
 <br>
-<br>
-<br>
     <div class="container" style="text-align:center">
                 <!--Form do agendamento-->
             <div class="login-page">
@@ -95,9 +93,11 @@
                 <div class="pure-control-group">
                     <div class="custon-select">
                         <label for="id_lab">Laboratório:</label>
-    
+                        
                         <select name="lab" maxlength="2" id="id_lab">
-                            <option value="01">Laboratório - 01</option>
+                            {% for laborartorio in laboratorios %}
+                                <option value="01">{{laborartorio.name}}</option>
+                            {% endfor %}
     
                         </select>
                                                     
@@ -143,6 +143,13 @@
                                 </select>
                                                                     
                             </div>
+                        </div>
+
+                        <div class='input-group date'>
+                            <input name="qn" type='text' class="form-control" placeholder=" Nome"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
                         </div>
                     
                         <div class="pure-control-group">

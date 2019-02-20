@@ -42,13 +42,13 @@
 
                     {% display_curses_tag posts.course as courses %}
                     {% for course in courses %}
-                        <p>Curso | {{ course }} {% if posts.period == "01" %}
+                        <p>{{ course }} {% if posts.period == "01" %}
                             <img  src="https://png.icons8.com/ios/50/666666/summer-filled.png" width="20">{%else%}
                             <img  src="https://png.icons8.com/ios-glyphs/50/666666/moon-symbol.png"width="20">{%endif%}
                         </p>
                     {% endfor %}
 
-                    <p>Data | {{posts.create_date}}</p>
+                    <p>{{posts.create_date|date:"D, d-M-Y"}}</p>
 
                     <!-- <img src="https://png.icons8.com/ios-glyphs/50/000000/moon-symbol.png"> -->
                     <!-- <img src="https://png.icons8.com/ios-glyphs/50/000000/sun.png"> -->

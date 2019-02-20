@@ -20,8 +20,6 @@ from django.contrib.auth.admin import User
 # Create your views here.
 def post_list(request):
 
-    print(platform.system())
- 
     data_inicial = timezone.now()
     data_final = data_inicial.fromordinal(data_inicial.toordinal()+5)
 
@@ -129,6 +127,7 @@ def curso_graphic(request):
 def semestre(request):
     DIAS=[]
 
+    laboratorios = Labs.objects.all()
     courses = Courses.objects.all()
     data_i = request.GET.get('qi')# ano+mês+dia
     data_f = request.GET.get('qf')# intervalo no SEMESTRE
@@ -137,6 +136,7 @@ def semestre(request):
     period = request.GET.get('period')
     unidad = request.GET.get('unidade')
     details = request.GET.get('details')
+    nome = request.GET.get('qn')
     
     if data_i and data_f:
         check_mo = request.GET.get('MO'); check_tu = request.GET.get('TU'); check_we = request.GET.get('WE')
@@ -165,7 +165,7 @@ def semestre(request):
             print('Curso:', course,'|', data)
             query = Post.objects.create(
                 course = course,
-                name = 'admin',
+                name = nome + " (admin)",
                 period = period,
                 create_date = data,
                 unidade = unidad,
@@ -176,7 +176,7 @@ def semestre(request):
            
     else:
         pass
-    context = {'courses':courses}
+    context = {'courses':courses, 'laboratorios':laboratorios}
     return render(request, 'blog/post_semestre.html', context)
 
 def FormatData(data):
