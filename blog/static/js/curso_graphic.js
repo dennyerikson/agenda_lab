@@ -21,7 +21,7 @@ $(document).ready(function() {
           text: 'Cursos mais agendados'
         },
         subtitle: {
-          text: 'Agendamento por curso no 2º semestre 2018'
+          text: 'Agendamento por curso no 1º semestre 2019'
         },
         xAxis: {
           type: 'category'

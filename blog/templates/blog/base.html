@@ -167,6 +167,11 @@
                                 {% endif %}
                             </a>
                         </li>
+                        {% if user.is_authenticated and user.is_superuser %}
+                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out" href="/admin">
+                                <img src="https://img.icons8.com/material-rounded/24/ffffff/settings.png" width="24">
+                            </a></li>
+                        {% endif %}
                         <!--Sobre-->
                         <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out" href="{% url 'post_graphs' %}">
                             <img src="https://img.icons8.com/material-rounded/50/ffffff/about.png" width="24"></a></li>
