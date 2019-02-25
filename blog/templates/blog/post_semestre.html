@@ -95,8 +95,8 @@
                         <label for="id_lab">Laboratório:</label>
                         
                         <select name="lab" maxlength="2" id="id_lab">
-                            {% for laborartorio in laboratorios %}
-                                <option value="01">{{laborartorio.name}}</option>
+                            {% for laboratorio in laboratorios %}
+                                <option value="{{laboratorio.value}}">{{laboratorio.name}}</option>
                             {% endfor %}
     
                         </select>

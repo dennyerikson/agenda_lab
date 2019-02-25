@@ -9,3 +9,26 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     margin: 10px auto;
   }
+
+  /* Set black background color, white text and some padding */
+footer {
+  background-color:  rgba(39, 39, 39);
+  color: white;
+  padding: 15px;
+  position: fixed;
+  bottom:0;
+  width:100%;
+  font-size: 10px;
+
+}
+
+.footer {
+  background-color: rgba(39, 39, 39);
+  color: white;
+  padding: 15px;
+}
+
+.footer p {
+margin: 15px 0 0 3px;
+position: relative;  
+}
