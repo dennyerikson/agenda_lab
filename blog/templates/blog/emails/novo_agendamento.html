@@ -1,0 +1,39 @@
+{% load poll_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{msg}} {{name}}</h1>
+    <h2>Conforme o solicitado o laboratório {{lab}}, está agendado.</h2>
+    <h3>Detalhes:</h3>
+    <h4>
+        {% display_curses_tag course as courses %}
+        {% for course in courses %}
+            Curso:{{course}}, 
+        {% endfor %}<br>
+
+        {% display_period_tag period as periods %}
+        {% for period in periods %}        
+            Periodo:{{period}}, 
+        {% endfor %}<br>
+        
+        Unidade:{{unidade|display_unidade_tag}}, <br>
+        Data:{{create_date|date:"D, d-M-y"}}, <br>
+        Detalhes:{{details}}, <br>
+    
+    </h4>
+
+    <p>
+        Pedimos que em caso de erro ou divergência nas informações 
+        entre em contato conosco nos telefones. <br> E-mail automático, favor não responder o mesmo.     
+    </p>
+    <p>Atenciosamente.</p>
+    <p>TIFAT</p>
+    <p>VG - (12) 3625-4937 | CS - (12) 3634-4146 </p>
+</body>
+</html>

@@ -1,7 +1,10 @@
 from django.db import models
 from django.utils import timezone
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from datetime import datetime
 
-
+# semestre = []
 # Create your models here.
 class Post(models.Model):
     lab = models.CharField(verbose_name='Laboratório',max_length=2)
@@ -20,6 +23,37 @@ class Post(models.Model):
     ('2','CS'),
     )
     unidade = models.CharField(verbose_name='Unidade', max_length=2, choices=UNIDADE_CHOICES)
+
+    def save(self, *args, **kwargs):
+        global semestre
+        
+        super(Post, self).save(*args, **kwargs)
+
+        hora = datetime.now().hour
+        msg = ''
+        if hora >= 6 and hora < 12:
+            msg = 'Bom dia,'
+        elif hora >= 12 and nora < 18:
+            msg = 'Boa tarde,'
+        else:
+            msg = 'Boa noite,'
+
+        data = {'lab': self.lab, 'course':self.course, 'name':self.name,
+            'period':self.period, 'details':self.details, 'unidade':self.unidade,
+            'create_date':self.create_date, 'msg':msg
+        }
+
+        plain_text = render_to_string('blog/emails/novo_agendamento.txt', data)
+        html_email = render_to_string('blog/emails/novo_agendamento.html', data)
+
+        send_mail(
+            'TIFAT - AGENDAMENTO DOS LABORATÓRIOS', # assunto
+            plain_text, # mensagem
+            'denny.monteiro@anhanguera.com', #to
+            ['tifat@anhanguera.com',], #from
+            html_message=html_email,
+            fail_silently=False,
+        )
 
     def __str__(self):
         return str(self.create_date)

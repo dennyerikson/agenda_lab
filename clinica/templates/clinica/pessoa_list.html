@@ -17,7 +17,7 @@
     
         <div class="container">
             <input class="form-control" id="myInput" type="text" placeholder="Search..">
-            <a id="create" href="/clinica/create"><span class="glyphicon glyphicon-plus"></span> add</a>
+            <a id="create" href="/clinica/create"><span class="glyphicon glyphicon-plus"></span> Novo</a>
             
         </div>
         <br>
@@ -27,8 +27,9 @@
               <th>Nome</th>
               <th>RG</th>
               <th>CPF</th>
-              <th>Celular</th>
-              <th>Data Incrição</th>
+              <th>CONTATO</th>
+              <th>INSCRIÇÃO</th>
+              <th>MAIS</th>
             </tr>
           </thead>
     
@@ -40,8 +41,8 @@
                     <td><p>{{ instance.nome }}</p></td><!--coluna-->
                     <td><p>{{ instance.rg }}</p></td><!--coluna-->    
                     <td><p>{{ instance.cpf }}</p></td><!--coluna-->
-                    <td><p>{{ instance.celular }}</p></td><!--coluna-->
-                    <td><p>{{ instance.create_date }}</p></td><!--coluna-->
+                    <td><p>{{ instance.contato }}</p></td><!--coluna-->
+                    <td><p>{{ instance.create_date|date:"D, d-M-y" }}</p></td><!--coluna-->
                     
                     <td>
                         <div class="btn">

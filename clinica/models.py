@@ -17,11 +17,10 @@ class Status(models.Model):
 # Create your models here.
 class Pessoa(models.Model):
     nome = models.CharField(max_length=150)
-    data_nasc = models.DateTimeField(blank=True, null=True)
+    data_nasc = models.DateField(blank=True, null=True, verbose_name='Data de nascimento')
     rg = models.CharField(max_length=10, blank=True, null=True)
     cpf = models.CharField(max_length=11, blank=True, null=True)
-    telefone = models.CharField(max_length=10)
-    celular = models.CharField(max_length=11)
+    contato = models.CharField(max_length=150)
     cep = models.CharField(max_length=20)
     linha1 = models.CharField(max_length=150, verbose_name='Endereço', blank=True, null=True)
     linha2 = models.CharField(max_length=150, verbose_name='Complemento', blank=True, null=True)

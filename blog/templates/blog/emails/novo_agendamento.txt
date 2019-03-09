@@ -1,0 +1,25 @@
+{% load poll_extras %}
+
+{{msg}} {{name}}</h1>
+Conforme o solicitado o laboratório {{lab}}, está agendado.</h2>
+Detalhes:
+
+{% display_curses_tag course as courses %}
+{% for course in courses %}
+    Curso:{{course}},
+{% endfor %}
+{% display_period_tag period as periods %}
+{% for period in periods %}        
+    Periodo:{{period}}, 
+{% endfor %}
+Unidade:{{unidade|display_unidade_tag}}, 
+Data:{{create_date|date:"D, d-M-y"}}, 
+Detalhes:{{details}}, 
+    
+
+Pedimos que em caso de erro ou divergência nas informações 
+entre em contato conosco nos telefones. <br> E-mail automático, favor não responder o mesmo.     
+
+Atenciosamente.
+TIFAT
+VG - (12) 3625-4937 | CS - (12) 3634-4146
