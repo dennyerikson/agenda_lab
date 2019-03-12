@@ -23,7 +23,7 @@ class PeriodForm(forms.ModelForm):
         COURSES = Courses.objects.all()
 
         model = Post
-        fields = ('create_date','unidade','course','lab','period','name','details')
+        fields = ('create_date','unidade','course','lab','period','name','email','details')
          
         widgets={
             
@@ -32,6 +32,7 @@ class PeriodForm(forms.ModelForm):
             'course':Select(choices=((choice.value, choice.name) for choice in COURSES )),
             'period':Select(choices=((choice.value, choice.name) for choice in PERIOD )),
             'create_date': forms.DateInput(attrs={'class':'datetime-input'}),
+            'details': forms.Textarea(attrs={"placeholder":"Exe:Informações, ou equipamentos como data-show, som etc..."}),
         }
 
         def options(self, name, value, attrs=None):

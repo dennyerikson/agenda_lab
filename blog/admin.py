@@ -4,7 +4,13 @@ from django.contrib.admin.helpers import ActionForm
 from django import forms
 from .actions import update_lab
 from django.forms.widgets import Select
-# Register your models here.
+from django.contrib.auth.models import User
+
+
+class AuthUserAdmin(admin.ModelAdmin):
+    list_display = ['username', 'email', 'first_name', 'last_name','is_staff', 'last_login']
+    search_fields = ['username', 'email', 'first_name']
+    list_filter = ['is_staff', 'is_active','is_superuser','last_login']
 
 class UpdateLabForm(ActionForm):
 
@@ -37,6 +43,10 @@ class CoursesAdmin(admin.ModelAdmin):
     list_display = FIELDS    
     search_fields = FIELDS
     list_filter = FIELDS
+
+
+admin.site.unregister(User)
+admin.site.register(User, AuthUserAdmin)
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Period)

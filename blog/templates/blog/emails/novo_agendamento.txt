@@ -13,13 +13,15 @@ Detalhes:
     Periodo:{{period}}, 
 {% endfor %}
 Unidade:{{unidade|display_unidade_tag}}, 
-Data:{{create_date|date:"D, d-M-y"}}, 
+Data:{{create_date}}, 
 Detalhes:{{details}}, 
     
 
+Este e-mail é automático, favor não responder o mesmo.
+
 Pedimos que em caso de erro ou divergência nas informações 
-entre em contato conosco nos telefones. <br> E-mail automático, favor não responder o mesmo.     
+entre em contato conosco.       
 
 Atenciosamente.
 TIFAT
-VG - (12) 3625-4937 | CS - (12) 3634-4146
+tifat@anhanguera.com

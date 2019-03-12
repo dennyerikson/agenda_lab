@@ -1,7 +1,4 @@
 {% extends 'blog/base.html' %}
-{% load staticfiles %}
-{% load static %}
-{% load poll_extras %}
 
 {% block content %}
 <br>
@@ -151,15 +148,21 @@
                                 <span class="glyphicon glyphicon-user"></span>
                             </span>
                         </div>
+
+                        <div class='input-group date'>
+                            <input name="mail" type='text' class="form-control" placeholder=" E-mail"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-envelope"></span>
+                            </span>
+                        </div>
                     
                         <div class="pure-control-group">
                             <div class="custon-select">
                                 <label for="id_details">Detalhes:</label>
-                                <textarea name="details" cols="40" rows="10" maxlength="150" required id="id_details">
-                                </textarea>
+                                <textarea style="height: 50px;" name="details"  maxlength="150" required id="id_details" placeholder="Exe:Informações, ou equipamentos como data-show, som etc..."></textarea>
                                                                     
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
                             
     
                                 <button class="btn btn-info btn-block"  id="btnim" type="submit" class="button">Salvar</button>
@@ -172,5 +175,36 @@
     
             </div>
             </div>
+
+        <!-- Modal Sucess -->
+        <div id="myModalsucess" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- inserindo modal 27/07/2018 -->
+                <div class="modal-content">
+                    <div class="modal-body">
+
+                        <div class="sucess">
+                            {% for message in messages%}
+                                <h3>{{message}}</h3>
+                            {% endfor %}
+                        </div>
+
+                        <div class="circle"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if messages %}
+            <script>
+                // alert("Salvo com Sucesso!");
+                $('#myModalsucess').modal('show');
+                    setTimeout(function(){
+                        $('#myModalsucess').modal('hide');
+                        window.location.href = "/";
+                    }, 2000);
+            </script>
+        {% endif %}
 
 {% endblock %}

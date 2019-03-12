@@ -16,9 +16,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.admin import User
+from .email import send_email
+from django.contrib import messages
+import datetime
 
 # Create your views here.
 def post_list(request):
+
+    data_dia = {}
 
     data_inicial = timezone.now()
     data_final = data_inicial.fromordinal(data_inicial.toordinal()+5)
@@ -27,30 +32,31 @@ def post_list(request):
     data_init = request.GET.get('qi')
     data_finish = request.GET.get('qf')
     data_course = request.GET.get('qc')
-    # data_lab = request.GET.get('qc')
-    # data_uni = request.GET.get('qu')
-    # data_period = request.GET.get('qp')
 
-    if data_init and data_finish and data_course or data_init and data_finish:
 
+    print(data_course, type(data_course))
+
+    if data_init and data_finish and not data_course=='14':
         post = Post.objects.filter(
-            Q(create_date__range=[data_init, data_finish]) |
-            
+
             Q(create_date__range=[data_init, data_finish]),
             Q(course=data_course)
 
-            # Q(create_date__range=[data_init, data_finish]),
-            # Q(course=data_course), Q(lab=data_lab) |
-
-            # Q(create_date__range=[data_init, data_finish]),
-            # Q(course=data_course), Q(lab=data_lab), Q(unidade=data_uni) |
-
-            # Q(create_date__range=[data_init, data_finish]), Q(course=data_course), 
-            # Q(lab=data_lab), Q(unidade=data_uni), Q(period=data_period)
-        
         ).order_by('create_date')
+
+    elif data_course == '14':
+        post = Post.objects.filter(Q(create_date__range=[data_init, data_finish])).all()
+
     else:
         post = Post.objects.filter(create_date__range=[timezone.now(), data_final]).order_by('create_date')
+
+        data_dia['hoje'] = str('{0:%Y-%m-%d}'.format(datetime.datetime.now()))
+
+        for dia in post:
+            if str(dia.create_date) == data_dia['hoje']:
+                data_dia['dia'] = str(dia.create_date)
+
+
     
     form_error = False; form_sucess = False
     if request.method == 'POST':
@@ -99,7 +105,7 @@ def post_list(request):
     courses = Courses.objects.all()
 
     # context = {'post':post, 'form':form, 'course':course, 'period':period, 'msg':msg}
-    context = {'post':post, 'form':form, 'form_sucess':form_sucess, 'form_error':form_error, 'courses':courses}
+    context = {'post':post, 'form':form, 'form_sucess':form_sucess, 'form_error':form_error, 'courses':courses, 'data_dia':data_dia}
     return render(request, 'blog/post_list.html', context)
 
 
@@ -137,6 +143,7 @@ def semestre(request):
     unidad = request.GET.get('unidade')
     details = request.GET.get('details')
     nome = request.GET.get('qn')
+    mail = request.GET.get('mail')
     
     if data_i and data_f:
         check_mo = request.GET.get('MO'); check_tu = request.GET.get('TU'); check_we = request.GET.get('WE')
@@ -160,19 +167,29 @@ def semestre(request):
 
         lista = list(rrule(MONTHLY, byweekday=DIAS, dtstart=parse(data_i), until=parse(data_f)))
 
-        
         for data in lista:
-            print('Curso:', course,'|', data)
-            query = Post.objects.create(
+            Post.objects.create(
                 course = course,
                 name = nome + " (admin)",
                 period = period,
                 create_date = data,
                 unidade = unidad,
                 details = details,
-                lab = lab
+                lab = lab,
+                quantidade = len(lista), #fazer ajustes para enviar email somente com a data inicial e a final
+                email=mail
             )
-            query.save()
+
+    
+        # data para enviar o email
+        data = {'lab':lab, 'course':course, 'name':nome,
+        'period':period, 'details':details, 'unidade':unidad,
+        'create_date':str('{0:%d-%m-%Y}'.format(lista[0]))+' à '+str('{0:%d-%m-%Y}'.format(lista[-1])),
+        'email':mail
+        }
+        send_email(data)
+
+        messages.success(request, 'Salvo e enviado e-mail com sucesso!')        
            
     else:
         pass
@@ -184,61 +201,4 @@ def FormatData(data):
     data = data[:-7]
     data = data.replace(', ','-')
     return data
-
-# import json
-# from django.http import HttpResponse, JsonResponse
-# def curso_json(request):
-#      # minha query onde obtenho os dados
-#     post = Post.objects.filter(create_date__range=['2018-07-01',timezone.now()])\
-#         .values('course')\
-#         .annotate(value=Count('course'))
-
-#     qnt_post = Post.objects.all().count()
-
-#     lista = [{'course': item['course'], 'quantidade': item['value']}
-#         for item in post]
-#     return JsonResponse({'cursos':lista})
-
-#     post = [ # obtenho um for com converção dos dados para dicionario 
-#         post_serializer(posts)
-#         for posts in post
-#     ]
-#     print(len(post))
-#     return HttpResponse(json.dumps(post), content_type='application/json')
-# def post_serializer(posts): #serealiza para dicionário
-#     return {'curso':posts.course, }
-
-
-# def event(request):
-#     all_events = Events.objects.all()
-#     get_event_types = Events.objects.only('event_type')
-
-#     # if filters applied then get parameter and filter based on condition else return object
-#     if request.GET:  
-#         event_arr = []
-#         if request.GET.get('event_type') == "all":
-#             all_events = Events.objects.all()
-#         else:   
-#             all_events = Events.objects.filter(event_type__icontains=request.GET.get('event_type'))
-
-#         for i in all_events:
-#             event_sub_arr = {}
-#             event_sub_arr['title'] = i.event_name
-#             start_date = datetime.datetime.strptime(str(i.start_date.date()), "%Y-%m-%d").strftime("%Y-%m-%d")
-#             end_date = datetime.datetime.strptime(str(i.end_date.date()), "%Y-%m-%d").strftime("%Y-%m-%d")
-#             event_sub_arr['start'] = start_date
-#             event_sub_arr['end'] = end_date
-#             event_arr.append(event_sub_arr)
-#         return HttpResponse(json.dumps(event_arr))
-
-#     context = {
-#         "events":all_events,
-#         "get_event_types":get_event_types,
-
-#     }
-#     return render(request,'blog/event_management.html',context)
-
-
-
-
 

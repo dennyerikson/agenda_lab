@@ -5,7 +5,7 @@
 
 <head>
     <!-- float menu button -->
-    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <link rel="stylesheet" href="collapzion.min.css">
     <script src="jquery.min.js"></script>
     <script src="collapzion.min.js"></script>
@@ -32,7 +32,10 @@
 
                 {% for posts in post %}
                 <div class="col-sm-3">
-                    <div class="detail-body">
+                    <!-- <div class="detail-body" style=""> -->
+                    <div class="detail-body" style="{% if data_dia.hoje == posts.create_date|date:"Y-m-d" %}
+                    box-shadow: 0 0 20px 0 rgba(0, 255, 0, 0.2), 0 5px 5px 0 rgba(0, 255, 0, 0.24); border-style: solid; border-color:rgba(0, 255, 0, 0.35);
+                    {%endif%}">
                     {% if posts.unidade == "1" %}
                         <h3><a class="nounderline" href=" {% url 'post_detail' pk=posts.pk %} " >Laboratório {{posts.lab}} | <font color="tomato"><b>{{posts.unidade|display_unidade_tag}}</b></a></font></h3>
                     {% else %}
@@ -48,7 +51,7 @@
                         </p>
                     {% endfor %}
 
-                    <p>{{posts.name}}, {{posts.create_date|date:"D, d-M-y"}}</p>
+                    <p style="{% if data_dia.hoje == posts.create_date|date:"Y-m-d" %}font-weight:bold{%endif%}">{{posts.name}}, {{posts.create_date|date:"D, d-M-y"}}</p>
 
                     <!-- <img src="https://png.icons8.com/ios-glyphs/50/000000/moon-symbol.png"> -->
                     <!-- <img src="https://png.icons8.com/ios-glyphs/50/000000/sun.png"> -->
